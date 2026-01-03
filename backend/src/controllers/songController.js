@@ -1,0 +1,149 @@
+import Song from "../models/song.js";
+
+/* ================= CREATE SONG ================= */
+export const createSong = async (req, res, next) => {
+    try {
+        const {
+            title,
+            artist,
+            album,
+            genre,
+            audioUrl,
+            coverImage,
+            duration,
+        } = req.body;
+
+        const song = await Song.create({
+            title,
+            artist,
+            album,
+            genre,
+            audioUrl,
+            coverImage,
+            duration,
+            uploadedBy: req.user._id,
+        });
+
+        res.status(201).json(song);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= GET ALL SONGS ================= */
+export const getAllSongs = async (req, res, next) => {
+    try {
+        const songs = await Song.find({ isPublic: true })
+            .populate("uploadedBy", "name")
+            .sort({ createdAt: -1 });
+
+        res.json(songs);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= GET SINGLE SONG ================= */
+export const getSongById = async (req, res, next) => {
+    try {
+        const song = await Song.findById(req.params.id).populate(
+            "uploadedBy",
+            "name"
+        );
+
+        if (!song) {
+            return res.status(404).json({ msg: "Song not found" });
+        }
+
+        res.json(song);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= UPDATE SONG ================= */
+export const updateSong = async (req, res, next) => {
+    try {
+        const song = await Song.findById(req.params.id);
+
+        if (!song) {
+            return res.status(404).json({ msg: "Song not found" });
+        }
+
+        // only owner can update
+        if (song.uploadedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ msg: "Not authorized" });
+        }
+
+        Object.assign(song, req.body);
+        await song.save();
+
+        res.json(song);
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= DELETE SONG ================= */
+export const deleteSong = async (req, res, next) => {
+    try {
+        const song = await Song.findById(req.params.id);
+
+        if (!song) {
+            return res.status(404).json({ msg: "Song not found" });
+        }
+
+        if (song.uploadedBy.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ msg: "Not authorized" });
+        }
+
+        await song.deleteOne();
+        res.json({ msg: "Song deleted successfully" });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= LIKE / UNLIKE SONG ================= */
+export const toggleLikeSong = async (req, res, next) => {
+    try {
+        const song = await Song.findById(req.params.id);
+
+        if (!song) {
+            return res.status(404).json({ msg: "Song not found" });
+        }
+
+        const userId = req.user._id;
+
+        const isLiked = song.likes.includes(userId);
+
+        if (isLiked) {
+            song.likes.pull(userId);
+        } else {
+            song.likes.push(userId);
+        }
+
+        await song.save();
+        res.json({ likes: song.likes.length });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/* ================= PLAY SONG ================= */
+export const playSong = async (req, res, next) => {
+    try {
+        const song = await Song.findById(req.params.id);
+
+        if (!song) {
+            return res.status(404).json({ msg: "Song not found" });
+        }
+
+        song.plays += 1;
+        await song.save();
+
+        res.json({ plays: song.plays });
+    } catch (error) {
+        next(error);
+    }
+};

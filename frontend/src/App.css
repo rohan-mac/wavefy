@@ -1,16 +1,29 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+
+
+#root {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px 0px;
+    text-align: center;
 }
+
+
+body {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #0f172a;
+  color: #ffffff;
+      margin: 0 !important;
+    padding: 0;
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -18,25 +31,148 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul.nav-list {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+.nav-list li a {
+    font-weight: bold;
+    color: #646cff;
+}
+.nav-list li a:hover {
+    color: #535bf2; 
 }
 
-.card {
-  padding: 2em;
+/* ROOT */
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.read-the-docs {
-  color: #888;
+
+/* SIDEBAR */
+.sidebar-container {
+  width: 240px;
+  background-color: #020617;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
 }
+
+
+/* MAIN CONTENT */
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+
+/* HEADER FIX */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background-color: #121212;
+    /* color: #ffffff; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); */
+    height: 70px;
+}
+
+/* OPTIONAL HEADER POLISH */
+.header {
+  /* background-color: #020617;
+  border-bottom: 1px solid #1e293b;
+  position: sticky;
+  top: 0;
+  z-index: 10; */
+  background-color: #020617;
+  border-bottom: 1px solid #1e293b;
+
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 1em #1db954aa);
+}
+
+     
+
+/* SIDEBAR CONTAINER */
+.sidebar-container {
+  width: 240px;
+  height: 100vh;
+  background-color: #020617;
+  border-right: 1px solid #1e293b;
+}
+
+/* SIDEBAR */
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* LOGO */
+.sidebar-logo {
+  margin-bottom: 35px;
+}
+
+.app-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1db954;
+  letter-spacing: 0.5px;
+}
+
+/* MENU */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* HOVER */
+.menu-item:hover {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+/* ACTIVE */
+.menu-item.active {
+  background-color: #1db954;
+  color: #020617;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #1e293b;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+
+

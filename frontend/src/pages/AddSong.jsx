@@ -37,10 +37,8 @@ const AddSong = () => {
         method: "POST",
         body: formData,
       });
-console.log(formData);
 
       const data = await res.json();
-      console.log(data);
 
       if (!res.ok) {
         throw new Error(data.error || "Upload failed");

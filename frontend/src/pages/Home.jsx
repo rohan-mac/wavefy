@@ -17,7 +17,6 @@ const Home = ({ setCurrentTrack }) => {
     async function fetchTracks() {
       try {
         const response = await getAllTracks();
-        console.log(response);
 
         setAllTracks(response.data);
       } catch (error) {
@@ -29,7 +28,6 @@ const Home = ({ setCurrentTrack }) => {
   }, []);
 
   const playSong = (track) => {
-    console.log("Playing:", track);
     // audio logic will go here later
   };
 

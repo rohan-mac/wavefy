@@ -12,7 +12,6 @@ const Albums = () => {
         const fetchAlbums = async () => {
             try {
                 const data = await getAlbums();
-                console.log(data.Data, "albbbbbbbbbbbbbb");
                 setAlbums(data.Data || []);
             } catch (error) {
                 console.error("Error fetching artists:", error);
@@ -24,7 +23,6 @@ const Albums = () => {
 
 
     function hitAlbums(albums) {
-        console.log(albums, "fghkhghjkl")
         nevigation(`/albums/${albums._id}`, { state: albums });
 
     }

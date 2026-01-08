@@ -12,7 +12,6 @@ const Artists = () => {
     const fetchArtists = async () => {
       try {
         const data = await getArtists();
-        console.log(data, "artists data");
         setArtists(data.data || []);
       } catch (error) {
         console.error("Error fetching artists:", error);
@@ -24,13 +23,11 @@ const Artists = () => {
 
 
   function ArtistSong(artist) {
-    console.log(artist);
     
     navigate(`/artist/${artist._id}`, { state: artist });
   }
 
 
-  console.log(artists.length);
   
   return (
     <div className="artists">

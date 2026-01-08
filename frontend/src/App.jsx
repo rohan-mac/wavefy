@@ -47,7 +47,6 @@ const App = () => {
           // isadmin = true
         }
 
-        console.log(data);
 
       })
 

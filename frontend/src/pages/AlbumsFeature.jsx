@@ -48,7 +48,6 @@ const AlbumsFeature = ({ setCurrentTrack }) => {
                         artistPopularSongs.map((song, index) => (
 
                             <div key={index} className="song-item" onClick={() => {
-                                console.log("jkkjsdkjfkjdfj")
                                 setCurrentTrack(song)
                             }
                             }>

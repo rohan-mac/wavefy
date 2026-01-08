@@ -4,7 +4,6 @@ import "../Header.css";
 import Nevigation from "./Nevigation";
 
 const Header = ({user}) => {
-  console.log(user)
   return (
     <header className="header">
       <Nevigation/>

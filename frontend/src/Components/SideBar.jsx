@@ -4,7 +4,6 @@ import User from "./Header.User";
 
 const Sidebar = ({ isadmin }) => {
 
-  console.log(isadmin)
   return (
     <aside className="sidebar">
 

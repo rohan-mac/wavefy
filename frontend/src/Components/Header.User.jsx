@@ -1,7 +1,6 @@
 import React from "react";
 
 function User({ user }) {
-  console.log(user);
   const username = user.name[0].toUpperCase() + user.name.slice(1);
   return (
     <div className="user-profile">

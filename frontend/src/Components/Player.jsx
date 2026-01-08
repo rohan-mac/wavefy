@@ -46,7 +46,7 @@ const Player = ({ track }) => {
       {/* Song Info */}
       <div className="player-info">
         <img
-          src={track?.imageUrl || "/assets/Gemini_Generated_Image_afrpjbafrpjbafrp.png"}
+          src={track?.imageUrl || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
           alt="cover"
         />
         <div>

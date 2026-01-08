@@ -96,10 +96,11 @@ const Home = ({ setCurrentTrack }) => {
             ))
           ) : (
             allTracks.map((track, index) => (
+                // let trackImage = track.imageUrl || "frontend/src/assets/Gemini_Generated_Image_afrpjbafrpjbafrp.png"
               <SwiperSlide key={track._id || index}>
                 <div className="all-songs" onClick={() => setCurrentTrack(track)}>
                   <div className="song-banner">
-                    <img src={track.imageUrl} alt={track.Name} />
+                    <img src={track.imageUrl || "frontend/src/assets/Gemini_Generated_Image_afrpjbafrpjbafrp.png"} alt={track.Name} />
                   </div>
                   <div className="song-info">
                     <h4>{track.title}</h4>

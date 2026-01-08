@@ -76,7 +76,8 @@
 
 import express from "express";
 import { upload } from "../middleware/multer.middleware.js";
-import { createSong } from "../controllers/songController.js";
+import { createSong , getAllSongs } from "../controllers/songController.js";
+// import { get } from "mongoose";
 
 const router = express.Router();
 
@@ -89,4 +90,5 @@ router.post(
   createSong
 );
 
+router.get("/allsongs", getAllSongs);
 export default router;

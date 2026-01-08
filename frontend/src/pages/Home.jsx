@@ -17,7 +17,9 @@ const Home = ({ setCurrentTrack }) => {
     async function fetchTracks() {
       try {
         const response = await getAllTracks();
-        setAllTracks(response.tracks);
+        console.log(response);
+
+        setAllTracks(response.data);
       } catch (error) {
         console.error("Error fetching tracks:", error);
       }
@@ -27,7 +29,7 @@ const Home = ({ setCurrentTrack }) => {
   }, []);
 
   const playSong = (track) => {
-    console.log("Playing:", track.Name);
+    console.log("Playing:", track);
     // audio logic will go here later
   };
 
@@ -35,8 +37,8 @@ const Home = ({ setCurrentTrack }) => {
     <div className="min-h-screen bg-slate-900 text-white font-[Poppins]">
 
       {/* Hero Section */}
-<section className="hero-section">
-         <div className="hero-content">
+      <section className="hero-section">
+        <div className="hero-content">
           <h1>Feel the Music</h1>
           <p>Stream millions of songs, anytime and anywhere</p>
 
@@ -44,7 +46,7 @@ const Home = ({ setCurrentTrack }) => {
             <button className="btn primary">Explore Music</button>
             <button className="btn secondary">Create Playlist</button>
           </div>
-        </div> 
+        </div>
         {/* <div>
           <h1 className="text-6xl font-bold mb-4">
             Feel the Music
@@ -97,11 +99,11 @@ const Home = ({ setCurrentTrack }) => {
               <SwiperSlide key={track._id || index}>
                 <div className="all-songs" onClick={() => setCurrentTrack(track)}>
                   <div className="song-banner">
-                    <img src={track.Image} alt={track.Name} />
+                    <img src={track.imageUrl} alt={track.Name} />
                   </div>
                   <div className="song-info">
-                    <h4>{track.Name}</h4>
-                    <span>{track.Artists[0]}</span>
+                    <h4>{track.title}</h4>
+                    <span>{track.artists[0]}</span>
                   </div>
                 </div>
               </SwiperSlide>

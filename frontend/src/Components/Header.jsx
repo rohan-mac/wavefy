@@ -3,11 +3,12 @@ import User from "./Header.User";
 import "../Header.css";
 import Nevigation from "./Nevigation";
 
-const Header = () => {
+const Header = ({user}) => {
+  console.log(user)
   return (
     <header className="header">
       <Nevigation/>
-      <User />  
+      <User user={user} />  
     </header>
   );
 };

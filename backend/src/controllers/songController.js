@@ -191,3 +191,38 @@ export const createSong = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllSongs = async (req, res) => {
+  try {
+    const songs = await Song.find()
+
+
+    return res.status(200).json({
+      success: true,
+      count: songs.length,
+      data: songs,
+    });
+  } catch (error) {
+    console.error("getAllSongs error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch songs",
+    });
+  }
+};
+
+
+export const getSongById = async (req, res, next) => {
+  try {
+    const song = await Song.findById(req.params.id).populate(
+      "uploadedBy",
+      "name"
+    );
+    if (!song) {
+      return res.status(404).json({ msg: "Song not found" });
+    }
+    res.json(song);
+  } catch (error) {
+    next(error);
+  }
+};

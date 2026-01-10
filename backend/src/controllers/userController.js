@@ -51,13 +51,13 @@ export const registerUser = async (req, res, next) => {
 export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    
+
     if (!email || !password) {
       return res.status(400).json({ msg: "Email and password required" });
     }
     console.log(email, password, " 👍👍")
     const user = await User.findOne({ email });
-    console.log(user,"🤦‍♂️🤦‍♂️");
+    console.log(user, "🤦‍♂️🤦‍♂️");
     if (!user) {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
@@ -94,7 +94,7 @@ export const getProfile = async (req, res) => {
     profileImage: req.user.profileImage,
     playlists: req.user.playlists,
     favouriteSongs: req.user.favouriteSongs,
-    role:req.user.role
+    role: req.user.role
   });
 };
 
@@ -157,6 +157,8 @@ export const updateUser = async (req, res, next) => {
     res.status(500).json({ msg: 'Internal Server Error' });
   }
 }
+
+
 export const deleteUser = async (req, res, next) => {
   try {
     if (req.user.role !== "admin" && req.user._id.toString() !== req.params.id) {
@@ -172,5 +174,29 @@ export const deleteUser = async (req, res, next) => {
     res.json({ msg: "User deleted successfully" });
   } catch (error) {
     next(error);
+  }
+};
+
+
+export const allUser = async () => {
+  try {
+    console.log("all user function called");
+    
+    const users = await User.find();
+    return users;
+
+  } catch (error) {
+    console.error("Error in all user function:", error);
+    throw error; // important for controller to catch
+  }
+};
+
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await allUser();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch users" });
   }
 };

@@ -5,10 +5,10 @@ const PlayList = () => {
     return (
         <div className="playlist-page">
             <h2>PlayList</h2>
-        <LoginSignup />
-        {/* <AddSong /> */}
+            <LoginSignup />
+            {/* <AddSong /> */}
         </div>
     );
-}   
+}
 
 export default PlayList;

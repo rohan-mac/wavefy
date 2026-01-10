@@ -1,13 +1,13 @@
 /* ===== Header Layout ===== */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 24px;
-    background-color: #121212;
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background-color: #121212;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  height: 47px;
 }
 
 /* ===== Logo ===== */
@@ -46,7 +46,8 @@
 }
 
 .nav-item a:hover {
-  color: #1db954; /* Spotify green vibe */
+  color: #1db954;
+  /* Spotify green vibe */
 }
 
 /* ===== User Section ===== */
@@ -153,6 +154,7 @@
   font-size: 0.75rem;
   color: #94a3b8;
 }
+
 eholder {
   color: #94a3b8;
 }
@@ -174,6 +176,7 @@ eholder {
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  position: relative;
 }
 
 .user-avatar {
@@ -199,6 +202,44 @@ eholder {
 .user-role {
   font-size: 0.75rem;
   color: #94a3b8;
+}
+
+
+.user-box {
+  background: blanchedalmond;
+  position: absolute;
+  top: 24%;
+  right: -20%;
+  transform: translate(0%, 100%);
+  padding: 5px 7px;
+  margin: 0;
+  width: 142px;
+}
+
+input.profileImageInput {
+  background: cadetblue;
+  padding: 9px 20px;
+  /* outline: currentColor; */
+  border: 2px solid black;
+  border-radius: 8px;
+}
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1db954;
+    color: #f9fafb;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    /* border: 1px solid red; */
+}
+
+.logout-button:hover {
+  background: #39d46f;
 }
 
 

@@ -52,14 +52,33 @@ const Sidebar = ({ isadmin }) => {
         </NavLink>
 
         {isadmin ? (
-          <NavLink
-            to="/liked"
-            className={({ isActive }) =>
-              `menu-item ${isActive ? "active" : ""}`
-            }
-          >
-            Liked Songs
-          </NavLink>
+          <>
+            <NavLink to="/users"
+              className={({ isActive }) =>
+                `menu-item ${isActive ? "active" : ""}`
+              }>
+              Users
+            </NavLink>
+            <NavLink
+              to="/songs"
+              className={({ isActive }) =>
+                `menu-item ${isActive ? "active" : ""}`
+              }
+            >
+              Songs
+            </NavLink>
+            <NavLink
+              to="/addsong"
+              className={({ isActive }) =>
+                `menu-item ${isActive ? "active" : ""}`
+              }
+            >
+              Add Song
+
+            </NavLink>
+
+          </>
+
         ) : (null)}
       </nav>
 

@@ -11,6 +11,9 @@ import Player from "./Components/Player";
 import AlbumsFeature from "./pages/AlbumsFeature";
 import { useState, useEffect } from "react";
 import LoginSignup from "./pages/LoginSignup";
+import AddSong from "./pages/AddSong";
+import Users from "./pages/Users";
+import Songs from "./pages/Songs";
 
 // let isadmin = false
 
@@ -85,6 +88,9 @@ const App = () => {
                 path="/albums/:id"
                 element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
               />
+              <Route path="/addsong" element={<AddSong />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/songs" element={<Songs />} />
             </Routes>
           </div>
 
@@ -96,7 +102,6 @@ const App = () => {
       )}
     </>
   );
-
 };
 
 // export default isadmin

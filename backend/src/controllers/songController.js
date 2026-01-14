@@ -1,6 +1,6 @@
 
 
-import Song from "../models/Song.js";
+import Song from "../models/song.js";
 import cloudinary from "../config/cloudinary.js";
 
 /* ========== CREATE SONG ========== */

@@ -33,7 +33,7 @@ const App = () => {
       return;
     }
 
-    fetch("http://localhost:5000/api/users/profile", {
+    fetch("https://wavefy.onrender.com/api/users/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

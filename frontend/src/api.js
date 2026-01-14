@@ -1,7 +1,7 @@
 export async function SignupUser(params) {
   try {
 
-    const response = await fetch("http://localhost:5000/api/users/register", {
+    const response = await fetch("https://wavefy.onrender.com/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export async function SignupUser(params) {
 export async function loginUser(params) {
   try {
 
-    const response = await fetch("http://localhost:5000/api/users/login", {
+    const response = await fetch("https://wavefy.onrender.com/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export async function getAllTracks() {
   try {
     const response = await fetch(
       //   `${import.meta.env.VITE_API_URL}/api/songs/allsongs`,
-      "http://localhost:5000/api/songs/allsongs",
+      "https://wavefy.onrender.com/api/songs/allsongs",
       {
         method: "GET",
         headers: {

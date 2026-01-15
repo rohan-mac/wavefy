@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../LoginSignup.css";
 // import { loginUser, registerUser } from "../api";
 import { useNavigate } from "react-router-dom";
-import { loginUser,SignupUser } from "../api";
+import { loginUser, SignupUser } from "../api";
 
 function LoginSignup() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,9 +12,14 @@ function LoginSignup() {
     name: "",
     email: "",
     password: "",
+    profileImage: null,
   });
 
   const [error, setError] = useState("");
+
+  function redirect() {
+    navigate("/");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,10 +39,12 @@ function LoginSignup() {
         response = await SignupUser(formData);
       }
 
+
+      console.log("Auth Response:", response);
       if (response?.token) {
         // ✅ Save token
         localStorage.setItem("token", response.token);
-
+        redirect();
         // 🚀 Go to home
         navigate("/");
       } else {
@@ -47,6 +54,7 @@ function LoginSignup() {
       setError(err.message || "Something went wrong");
     }
   };
+
 
   return (
     <div className="auth-container">
@@ -90,6 +98,17 @@ function LoginSignup() {
             }
             required
           />
+          {!isLogin && (
+            <input
+              type="file"
+              name="profileImage"
+              accept="image/*"
+              onChange={(e) =>
+                setFormData({ ...formData, profileImage: e.target.files[0] })
+              }
+            />
+
+          )}
 
           <button type="submit">
             {isLogin ? "Login" : "Sign Up"}

@@ -1,0 +1,15 @@
+ul {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 10px;
+    background: white;
+    color: black;
+}
+
+li {
+    border-radius: 10px;
+    background: cadetblue;
+    padding: 16px 22px;
+    /* max-width: 200px; */
+    list-style: none;
+}

@@ -18,6 +18,11 @@ export const registerUser = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+
+
+    const imageUpload = await cloudinary.uploader.upload(req.files.profileImage[0].path);
+    const userprofileImage = imageUpload.secure_url;
+
     const user = await User.create({
       name,
       email,
@@ -27,6 +32,7 @@ export const registerUser = async (req, res, next) => {
       favouriteAlbums: [],
       favouriteArtists: [],
       recentlyPlayed: [],
+      profileImage: userprofileImage,
     });
 
     const token = generateToken(user._id);
@@ -181,7 +187,7 @@ export const deleteUser = async (req, res, next) => {
 export const allUser = async () => {
   try {
     console.log("all user function called");
-    
+
     const users = await User.find();
     return users;
 

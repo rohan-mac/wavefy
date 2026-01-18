@@ -1,46 +1,49 @@
-
 // import jwt from "jsonwebtoken";
 // import User from "../models/User.js";
 
 // export const protect = async (req, res, next) => {
-//   try {
-//     const authHeader = req.headers.authorization;
+//     let token;
 
-//     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//       return res.status(401).json({ msg: "Not authorized, no token" });
+//     if (
+//         req.headers.authorization &&
+//         req.headers.authorization.startsWith("Bearer")
+//     ) {
+//         try {
+//             token = req.headers.authorization.split(" ")[1];
+
+//             const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+//             req.user = await User.findById(decoded.id).select("-password");
+//             next();
+//         } catch (error) {
+//             return res.status(401).json({ msg: "Not authorized, token failed" });
+//         }
 //     }
 
-//     const token = authHeader.split(" ")[1];
-
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-//     req.user = await User.findById(decoded.id).select("-password");
-
-//     next();
-//   } catch (error) {
-//     return res.status(401).json({ msg: "Not authorized, token failed" });
-//   }
+//     if (!token) {
+//         return res.status(401).json({ msg: "Not authorized, no token" });
+//     }
 // };
-
-
-
 
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 export const protect = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
-      return res.status(401).json({ msg: "Not authorized" });
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ msg: "Not authorized, no token" });
     }
 
+    const token = authHeader.split(" ")[1];
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     req.user = await User.findById(decoded.id).select("-password");
 
     next();
   } catch (error) {
-    res.status(401).json({ msg: "Token failed" });
+    return res.status(401).json({ msg: "Not authorized, token failed" });
   }
 };

@@ -28,10 +28,11 @@
 
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 
 import songRoutes from "./routes/songRoutes.js";
 import userRouter from "./routes/userRouter.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 

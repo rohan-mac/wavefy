@@ -25,40 +25,91 @@ const App = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
   const [isadmin, setIsAdmin] = useState(false)
 
-  useEffect(() => {
-    const token = localStorage.getItem("wavefytoken");
-    // localStorage.setItem("wavefytoken","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWQ1YTRmMzY3MjEwZjc1NWJmZjE0ZiIsImlhdCI6MTc2NzcyNTY0NywiZXhwIjoxNzY4MzMwNDQ3fQ.YvgT09aFAVWjwIHN8hRtH-ltunKSA0ocnSysUGY661Y")
-    if (!token) {
-      setUserIsLoggedIn(false);
-      return;
-    }
+  // useEffect(() => {
+  //   const token = localStorage.getItem("wavefytoken");
+  //   // localStorage.setItem("wavefytoken","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWQ1YTRmMzY3MjEwZjc1NWJmZjE0ZiIsImlhdCI6MTc2NzcyNTY0NywiZXhwIjoxNzY4MzMwNDQ3fQ.YvgT09aFAVWjwIHN8hRtH-ltunKSA0ocnSysUGY661Y")
+  //   if (!token) {
+  //     setUserIsLoggedIn(false);
+  //     return;
+  //   }
 
-    fetch("https://wavefy.onrender.com/api/users/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  //   fetch("https://wavefy.onrender.com/api/users/profile", {
+  // headers: {
+  //   Authorization: `Bearer ${token}`,
+  // },
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) throw new Error("Not authorized");
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setUser(data);
+  //       setUserIsLoggedIn(true);
+  //       if (data.role === "admin") {
+  //         setIsAdmin(true)
+  //         // isadmin = true
+  //       }
+
+
+  //     })
+
+  //     .catch(() => {
+  //       localStorage.removeItem("wavefytoken");
+  //       setUser(null);
+  //       setUserIsLoggedIn(false);
+  //     });
+  // }, []);
+
+
+  // useEffect(() => {
+  //   fetch("https://wavefy.onrender.com/api/users/profile", {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     credentials: "include", // ✅ IMPORTANT (send cookies)
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) throw new Error("Not authorized");
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       setUser(data);
+  //       setUserIsLoggedIn(true);
+
+  //       if (data.role === "admin") {
+  //         setIsAdmin(true);
+  //       }
+  //     })
+  //     .catch(() => {
+  //       setUser(null);
+  //       setUserIsLoggedIn(false);
+  //       setIsAdmin(false);
+  //     });
+  // }, []);
+
+
+useEffect(() => {
+  fetch("https://wavefy.onrender.com/api/users/profile", {
+    method: "GET",
+    credentials: "include", // ✅ cookie sent automatically
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Unauthorized");
+      return res.json();
     })
-      .then((res) => {
-        if (!res.ok) throw new Error("Not authorized");
-        return res.json();
-      })
-      .then((data) => {
-        setUser(data);
-        setUserIsLoggedIn(true);
-        if (data.role === "admin") {
-          setIsAdmin(true)
-          // isadmin = true
-        }
+    .then(data => {
+      setUser(data);
+      setUserIsLoggedIn(true);
+      if (data.role === "admin") setIsAdmin(true);
+    })
+    .catch(() => {
+      setUser(null);
+      setUserIsLoggedIn(false);
+      setIsAdmin(false);
+    });
+}, []);
 
-
-      })
-
-      .catch(() => {
-        localStorage.removeItem("wavefytoken");
-        setUser(null);
-        setUserIsLoggedIn(false);
-      });
-  }, []);
 
 
 
@@ -98,7 +149,12 @@ const App = () => {
           <Player track={currentTrack} />
         </div>
       ) : (
-        <LoginSignup />
+        // <LoginSignup />
+
+        <LoginSignup onLoginSuccess={() => {
+          window.location.reload(); // simplest & reliable
+        }} />
+
       )}
     </>
   );

@@ -18,7 +18,7 @@ function LoginSignup() {
   const [error, setError] = useState("");
 
   function redirect() {
-    navigate("/");
+    navigate("/artists");
   }
 
   const handleSubmit = async (e) => {
@@ -46,7 +46,7 @@ function LoginSignup() {
         localStorage.setItem("token", response.token);
         redirect();
         // 🚀 Go to home
-        navigate("/");
+        // navigate("/");
       } else {
         setError("Invalid credentials");
       }

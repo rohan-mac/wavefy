@@ -35,18 +35,33 @@ export const registerUser = async (req, res, next) => {
       profileImage: userprofileImage,
     });
 
-    const token = generateToken(user._id);
+    // const token = generateToken(user._id);
 
-    res.status(201).json({
-      msg: "User registered successfully",
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        profileImage: user.profileImage,
-      },
-    });
+    // res.status(201).json({
+    //   msg: "User registered successfully",
+    //   token,
+    //   user: {
+    //     id: user._id,
+    //     name: user.name,
+    //     email: user.email,
+    //     profileImage: user.profileImage,
+    //   },
+    // });
+
+
+
+    generateToken(res, user._id);
+
+res.status(201).json({
+  msg: "User registered successfully",
+  user: {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    profileImage: user.profileImage,
+  },
+});
+
   } catch (error) {
     next(error);
   }
@@ -73,18 +88,33 @@ export const loginUser = async (req, res, next) => {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
-    const token = generateToken(user._id);
+    // const token = generateToken(user._id);
 
-    res.status(200).json({
-      msg: "Login successful",
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        profileImage: user.profileImage,
-      },
-    });
+    // res.status(200).json({
+    //   msg: "Login successful",
+    //   token,
+    //   user: {
+    //     id: user._id,
+    //     name: user.name,
+    //     email: user.email,
+    //     profileImage: user.profileImage,
+    //   },
+    // });
+
+
+
+    generateToken(res, user._id);
+
+res.status(200).json({
+  msg: "Login successful",
+  user: {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    profileImage: user.profileImage,
+  },
+});
+
   } catch (error) {
     next(error);
   }

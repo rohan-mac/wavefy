@@ -1,36 +1,3 @@
-// export async function SignupUser(params) {
-
-
-//   try {
-
-//     const response = await fetch("https://wavefy.onrender.com/api/users/register", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(params),
-//     });
-
-//     // ❗ handle API errors
-//     if (!response.ok) {
-//       const errorData = await response.json();
-//       throw new Error(errorData.message || "Login failed");
-//     }
-
-
-//     const data = await response.json();
-//     console.log(data);
-//     // ✅ correct condition
-//     if (data?.token) {
-//       localStorage.setItem("wavefytoken", data.token);
-//     }
-
-//     return data;
-//   } catch (error) {
-//     console.error("error in creation function:", error.message);
-//     return { error: error.message };
-//   }
-// }
 
 
 export async function SignupUser(params) {
@@ -39,6 +6,7 @@ export async function SignupUser(params) {
     
     const response = await fetch(
       "https://wavefy.onrender.com/api/users/register",
+      // "http://localhost:5000/api/users/register",
       {
         method: "POST",
         headers: {

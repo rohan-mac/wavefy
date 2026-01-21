@@ -53,13 +53,13 @@ export async function loginUser(params) {
     const data = await response.json();
 
     // ✅ correct condition
-    // if (data?.token) {
-    //   localStorage.setItem("wavefytoken", data.token);
-    // }
-
     if (data?.token) {
-      document.cookie = `wavefytoken=${data.token}; path=/; max-age=${60 * 60 * 24}`;
+      localStorage.setItem("wavefytoken", data.token);
     }
+
+    // if (data?.token) {
+    //   document.cookie = `wavefytoken=${data.token}; path=/; max-age=${60 * 60 * 24}`;
+    // }
 
 
 

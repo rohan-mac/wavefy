@@ -18,7 +18,7 @@ function LoginSignup() {
   const [error, setError] = useState("");
 
   function redirect() {
-    navigate("/artists");
+    navigate("/");
   }
 
   const handleSubmit = async (e) => {

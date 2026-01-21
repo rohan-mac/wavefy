@@ -6,15 +6,30 @@ import userRouter from "./routes/userRouter.js";
 const app = express();
 
 // Middleware
-app.use(cors(
-    {
+// app.use(cors(
+//     {
+//     origin: [
+//       "http://localhost:5173",
+//       "https://wavefy.vercel.app" // example prod URL
+//     ],
+//     credentials: true,
+//   }
+// ));
+
+
+
+app.use(
+  cors({
     origin: [
-      "http://localhost:5173",
-      "https://wavefy.vercel.app" // example prod URL
+      "https://rohan-mac-wavefy.vercel.app",
+      "http://localhost:5173"
     ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  }
-));
+  })
+);
+
 app.use(express.json());
 
 

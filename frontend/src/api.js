@@ -1,31 +1,69 @@
+// export async function SignupUser(params) {
+
+
+//   try {
+
+//     const response = await fetch("https://wavefy.onrender.com/api/users/register", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(params),
+//     });
+
+//     // ❗ handle API errors
+//     if (!response.ok) {
+//       const errorData = await response.json();
+//       throw new Error(errorData.message || "Login failed");
+//     }
+
+
+//     const data = await response.json();
+//     console.log(data);
+//     // ✅ correct condition
+//     if (data?.token) {
+//       localStorage.setItem("wavefytoken", data.token);
+//     }
+
+//     return data;
+//   } catch (error) {
+//     console.error("error in creation function:", error.message);
+//     return { error: error.message };
+//   }
+// }
+
+
 export async function SignupUser(params) {
   try {
+    console.log(params);
+    
+    const response = await fetch(
+      "https://wavefy.onrender.com/api/users/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      }
+    );
 
-    const response = await fetch("https://wavefy.onrender.com/api/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(params),
-    });
-
-    // ❗ handle API errors
+    // handle API errors
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Login failed");
+      throw new Error(errorData.msg || "Signup failed");
     }
 
-
     const data = await response.json();
+    console.log(data);
 
-    // ✅ correct condition
     if (data?.token) {
       localStorage.setItem("wavefytoken", data.token);
     }
 
     return data;
   } catch (error) {
-    console.error("error in login function:", error.message);
+    console.error("error in signup function:", error.message);
     return { error: error.message };
   }
 }
@@ -51,6 +89,7 @@ export async function loginUser(params) {
 
 
     const data = await response.json();
+    console.log(data);
 
     // ✅ correct condition
     if (data?.token) {

@@ -5,6 +5,8 @@ import cloudinary from "../config/cloudinary.js";
 /* ================= REGISTER ================= */
 export const registerUser = async (req, res, next) => {
   try {
+    console.log("Register endpoint hit");
+
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -20,8 +22,19 @@ export const registerUser = async (req, res, next) => {
 
 
 
-    const imageUpload = await cloudinary.uploader.upload(req.files.profileImage[0].path);
-    const userprofileImage = imageUpload.secure_url;
+    // const imageUpload = await cloudinary.uploader.upload(req.files.profileImage[0].path);
+    // const userprofileImage = imageUpload.secure_url;
+
+
+    // let userprofileImage = "";
+
+    // if (req.files?.profileImage?.length) {
+    //   const imageUpload = await cloudinary.uploader.upload(
+    //     req.files.profileImage[0].path
+    //   );
+    //   userprofileImage = imageUpload.secure_url;
+    // }
+
 
     const user = await User.create({
       name,
@@ -32,9 +45,10 @@ export const registerUser = async (req, res, next) => {
       favouriteAlbums: [],
       favouriteArtists: [],
       recentlyPlayed: [],
-      profileImage: userprofileImage,
+      // profileImage: userprofileImage,
     });
 
+    console.log("User created:", user);
     const token = generateToken(user._id);
 
     res.status(201).json({
@@ -48,13 +62,17 @@ export const registerUser = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    console.error("Register error:", error);
+    res.status(500).json({ msg: "Registration failed" });
   }
+
 };
 
 
 /* ================= LOGIN ================= */
 export const loginUser = async (req, res, next) => {
+  console.log("👍👍👍👍☺1");
+
   try {
     const { email, password } = req.body;
 
@@ -74,7 +92,7 @@ export const loginUser = async (req, res, next) => {
     }
 
     const token = generateToken(user._id);
-
+    console.log("User logged in:", user);
     res.status(200).json({
       msg: "Login successful",
       token,

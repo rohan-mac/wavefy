@@ -12,7 +12,7 @@ function LoginSignup() {
     name: "",
     email: "",
     password: "",
-    profileImage: null,
+    // profileImage: null,
   });
 
   const [error, setError] = useState("");
@@ -98,17 +98,7 @@ function LoginSignup() {
             }
             required
           />
-          {!isLogin && (
-            <input
-              type="file"
-              name="profileImage"
-              accept="image/*"
-              onChange={(e) =>
-                setFormData({ ...formData, profileImage: e.target.files[0] })
-              }
-            />
-
-          )}
+    
 
           <button type="submit">
             {isLogin ? "Login" : "Sign Up"}

@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-// import {router} from "./routers/userRouter";
 import songRoutes from "./routes/songRoutes.js";
 import userRouter from "./routes/userRouter.js";
 

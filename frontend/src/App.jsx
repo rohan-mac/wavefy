@@ -14,6 +14,7 @@ import LoginSignup from "./pages/LoginSignup";
 import AddSong from "./pages/AddSong";
 import Users from "./pages/Users";
 import Songs from "./pages/Songs";
+import AddArtist from "./pages/AddArtist";
 
 // let isadmin = false
 
@@ -118,7 +119,7 @@ const App = () => {
                 <Route path="/addsong" element={<AddSong />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/songs" element={<Songs />} />
-
+                <Route path="/addartist" element={<AddArtist />} />
               </Routes>
                 <Player track={currentTrack} />
             </>

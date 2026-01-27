@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserProfile } from "../api";
 import "../Users.css";
+import Loader from "../Components/Loader";
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
@@ -22,7 +23,7 @@ const Users = () => {
     getProfile();
   }, []);
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <Loader />;
   if (!userData || userData.length === 0) return <h2>No users found</h2>;
 
   return (
@@ -33,7 +34,7 @@ const Users = () => {
           <li key={user._id} className="user-card">
             <div className="userProfile">
               <img
-                src={user.profileImage}
+                src={user.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
                 alt={`${user.name} profile`}
                 className="profile-img"
               />

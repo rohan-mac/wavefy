@@ -77,6 +77,15 @@ const Sidebar = ({ isadmin }) => {
 
             </NavLink>
 
+            <NavLink
+              to="/addartist"
+              className={({ isActive }) =>
+                `menu-item ${isActive ? "active" : ""}`
+              }
+            >
+              Add Artist
+
+            </NavLink>
           </>
 
         ) : (null)}

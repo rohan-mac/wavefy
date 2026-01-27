@@ -68,23 +68,33 @@ const Home = ({ setCurrentTrack }) => {
       {/* Featured Albums / Tracks Slider */}
       <section className="section">
         <h2 className="section-title">Featured Albums</h2>
+<Swiper
+  modules={[Autoplay, Navigation]}
+  spaceBetween={16}
+  autoplay={{
+    delay: 3000,
+    disableOnInteraction: false,
+  }}
+  breakpoints={{
+    0: {
+      slidesPerView: 1,
+      navigation: false,
+    },
+    480: {
+      slidesPerView: 1.3,
+      navigation: false,
+    },
+    768: {
+      slidesPerView: 3,
+      navigation: true,
+    },
+    1024: {
+      slidesPerView: 5,
+      navigation: true,
+    },
+  }}
+>
 
-        <Swiper
-          modules={[Autoplay, Navigation]}
-          slidesPerView={5}
-          spaceBetween={20}
-          navigation
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          breakpoints={{
-            320: { slidesPerView: 1.2 },
-            640: { slidesPerView: 2.2 },
-            768: { slidesPerView: 3.2 },
-            1024: { slidesPerView: 5 },
-          }}
-        >
           {allTracks.length === 0 ? (
             // Skeleton while songs load
             Array.from({ length: 5 }).map((_, index) => (

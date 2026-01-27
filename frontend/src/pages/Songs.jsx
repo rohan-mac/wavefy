@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../Songs.css";
 import { getAllTracks } from "../api";
 import axios from "axios";
+import Loader from "../Components/Loader";
 
 const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
   const [allTracks, setAllTracks] = React.useState([]);
@@ -19,22 +20,22 @@ const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
     fetchTracks();
   }, []);
 
-const handleLikeSong = async (songId) => {
-  const token = localStorage.getItem("wavefytoken");
+  const handleLikeSong = async (songId) => {
+    const token = localStorage.getItem("wavefytoken");
 
-  try {
-    const res = await axios.post(
-      `http://localhost:5000/api/users/favourite/${songId}`,
-      {},
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/users/favourite/${songId}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    console.log(res.data.message);
-  } catch (err) {
-    console.error(err.response?.data?.message || err.message);
-  }
-};
-  
+      console.log(res.data.message);
+    } catch (err) {
+      console.error(err.response?.data?.message || err.message);
+    }
+  };
+
 
   console.log("All Tracks:", allTracks);
 
@@ -75,7 +76,7 @@ const handleLikeSong = async (songId) => {
           </div>
         ))
       ) : (
-        <p>No songs found.</p>
+        <Loader />
       )}
     </div>
   );

@@ -1,45 +1,8 @@
 
 const BASE_URL = "https://wavefy.onrender.com/api";
 
-// export async function SignupUser(params) {
-//   try {
-//     console.log(params);
 
-//     const response = await fetch(
-//       // `${BASE_URL}/users/register`,
-//       "http://localhost:5000/api/users/register",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(params),
-//       }
-//     );
-
-//     // handle API errors
-//     if (!response.ok) {
-//       const errorData = await response.json();
-//       throw new Error(errorData.msg || "Signup failed");
-//     }
-
-//     const data = await response.json();
-//     console.log(data);
-
-// if (data?.token) {
-//   localStorage.setItem("wavefytoken", data.token);
-// }
-
-//     return data;
-//   } catch (error) {
-//     console.error("error in signup function:", error.message);
-//     return { error: error.message };
-//   }
-// }
-
-
-/* ===================== SIGNUP ===================== */
-export const SignupUser = async (data) => {
+export async function SignupUser(data) {
   const formData = new FormData();
 
   formData.append("name", data.name);
@@ -50,7 +13,7 @@ export const SignupUser = async (data) => {
     formData.append("profileImage", data.profileImage);
   }
 
-  const response = await fetch(`http://localhost:5000/api/users/register`, {
+  const response = await fetch(`${BASE_URL}/users/register`, {
     method: "POST",
     body: formData, // ❗ DO NOT set headers
   });
@@ -65,6 +28,7 @@ export const SignupUser = async (data) => {
 
   return response.json();
 };
+
 
 export async function loginUser(params) {
   try {
@@ -97,7 +61,7 @@ export async function loginUser(params) {
     console.error("error in login function:", error.message);
     return { error: error.message };
   }
-}
+};
 
 
 export async function fetchUserProfile() {
@@ -121,7 +85,7 @@ export async function fetchUserProfile() {
     console.error("fetchUserProfile error:", error);
     return { error: error.message };
   }
-}
+};
 
 
 export async function getAllTracks() {
@@ -148,7 +112,7 @@ export async function getAllTracks() {
     console.error("getAllTracks error:", error);
     return [];
   }
-}
+};
 
 
 export async function getArtists() {
@@ -162,12 +126,12 @@ export async function getArtists() {
     })
     let array = await response.json();
     console.log(array);
-    
+
     return array;
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 
 export async function getAlbums() {
@@ -184,6 +148,5 @@ export async function getAlbums() {
   } catch (error) {
     console.log(error);
   }
-}
-
+};
 

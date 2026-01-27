@@ -1,162 +1,138 @@
-.add-song-container {
+/* Page */
+.add-song-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  font-family: "Inter", sans-serif;
+  padding: 16px;
+}
+
+/* Card */
+.add-song-card {
+  width: 100%;
   max-width: 420px;
-  margin: 60px auto;
-  padding: 24px;
-  background: #0f172a; /* dark slate */
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: rgba(11, 18, 32, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 28px;
+  border-radius: 14px;
+  color: white;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.add-song-container h2 {
-  text-align: center;
+.add-song-card h2 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #94a3b8;
   margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: 600;
 }
 
+/* Form */
 .add-song-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.add-song-form input[type="text"] {
-  padding: 10px 12px;
+/* Inputs */
+.input {
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 12px;
   border-radius: 8px;
-  border: none;
-  outline: none;
-  background: #1e293b;
-  color: #fff;
+  color: white;
   font-size: 14px;
 }
 
-.add-song-form input::placeholder {
-  color: #94a3b8;
+.input:focus {
+  outline: none;
+  border-color: #6366f1;
 }
 
+/* File input */
 .file-input {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
-  color: #cbd5f5;
+  background: #020617;
+  border: 1px dashed #334155;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  color: #c7d2fe;
+}
+
+.file-input:hover {
+  border-color: #6366f1;
 }
 
 .file-input input {
-  background: #1e293b;
-  padding: 8px;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
+  display: none;
 }
 
-.add-song-form button {
-  margin-top: 10px;
+/* Button */
+.button {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
   padding: 12px;
   border-radius: 10px;
-  border: none;
-  background: linear-gradient(135deg, #6366f1, #22d3ee);
-  color: #020617;
   font-size: 15px;
   font-weight: 600;
+  color: white;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.add-song-form button:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
-}
-
-.add-song-form button:disabled {
+.button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* Message */
 .message {
-  margin-top: 12px;
+  margin-top: 14px;
   text-align: center;
   font-size: 14px;
 }
 
-.message.success {
+.success {
   color: #22c55e;
 }
 
-.message.error {
+.error {
   color: #ef4444;
 }
 
-
-/* Tablets & small laptops */
-@media (max-width: 768px) {
-  .add-song-container {
-    max-width: 90%;
-    margin: 40px auto;
-    padding: 20px;
-  }
-
-  .add-song-container h2 {
-    font-size: 20px;
-  }
-
-  .add-song-form input[type="text"] {
-    font-size: 15px;
-    padding: 12px;
-  }
-
-  .add-song-form button {
-    font-size: 16px;
-    padding: 14px;
-  }
+/* Image Preview */
+.preview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
-/* Mobile devices */
+.preview img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #6366f1;
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+/* Audio Preview */
+.audio-preview {
+  width: 100%;
+  margin-top: -4px;
+  border-radius: 8px;
+}
+
+/* Mobile */
 @media (max-width: 480px) {
-  .add-song-container {
-    max-width: 95%;
-    margin: 24px auto;
-    padding: 16px;
-    border-radius: 10px;
-  }
-
-  .add-song-container h2 {
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-
-  .add-song-form {
-    gap: 12px;
-  }
-
-  .add-song-form input[type="text"] {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .file-input {
-    font-size: 12px;
-  }
-
-  .file-input input {
-    padding: 10px;
-  }
-
-  .add-song-form button {
-    font-size: 15px;
-    padding: 12px;
-    border-radius: 8px;
-  }
-
-  .message {
-    font-size: 13px;
-  }
-}
-
-/* Large screens (optional polish) */
-@media (min-width: 1024px) {
-  .add-song-container {
-    max-width: 460px;
+  .add-song-card {
+    padding: 20px;
   }
 }

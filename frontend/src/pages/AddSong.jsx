@@ -33,7 +33,9 @@ const AddSong = () => {
       formData.append("audio", audio);
       formData.append("image", image);
 
-      const res = await fetch("http://localhost:5000/api/songs/add-song", {
+      const BASE_URL = "https://wavefy.onrender.com/api";
+
+      const res = await fetch(`${BASE_URL}/songs/add-song`, {
         method: "POST",
         body: formData,
       });

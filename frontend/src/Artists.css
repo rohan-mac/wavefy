@@ -94,8 +94,66 @@
     /* position: relative; */
 }
 /* Mobile Responsive */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .artist-list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 16px;
+  }
+
   .artist-card img {
-    height: 160px;
+    height: 180px;
+  }
+
+  .artist-name p {
+    font-size: 14px;
+    padding: 6px 10px;
   }
 }
+
+@media (max-width: 600px) {
+  .artist-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .artist-card {
+    border-radius: 14px;
+  }
+
+  .artist-card img {
+    height: 150px;
+  }
+
+  /* Always show name on mobile (no hover) */
+  .artist-name {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .artist-card::after {
+    opacity: 1;
+  }
+
+  .artist-name p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .artist-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .artist-card img {
+    height: 140px;
+  }
+
+  .artist-name p {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+
+

@@ -61,6 +61,8 @@ const ArtistDetail = ({ setCurrentTrack }) => {
                             <div key={index} className="song-item" onClick={() => {
                                 console.log("jkkjsdkjfkjdfj")
                                 setCurrentTrack(song)
+                                console.log(song);
+                                
                             }
                             }>
                                 {/* <span className="song-index">{index + 1}.</span>

@@ -99,29 +99,32 @@ const App = () => {
 
           {/* Main Content */}
           <div className="main-container">
-            <Header user={user} />
+            <>
+              <Header user={user} />
 
-            <Routes>
-              <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
-              <Route path="/artists" element={<Artists />} />
-              <Route path="/albums" element={<Albums />} />
-              <Route path="/playlists" element={<PlayList />} />
-              <Route
-                path="/artist/:id"
-                element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
-              />
-              <Route
-                path="/albums/:id"
-                element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
-              />
-              <Route path="/addsong" element={<AddSong />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/songs" element={<Songs />} />
-            </Routes>
+              <Routes>
+                <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
+                <Route path="/artists" element={<Artists />} />
+                <Route path="/albums" element={<Albums />} />
+                <Route path="/playlists" element={<PlayList />} />
+                <Route
+                  path="/artist/:id"
+                  element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
+                />
+                <Route
+                  path="/albums/:id"
+                  element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
+                />
+                <Route path="/addsong" element={<AddSong />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/songs" element={<Songs />} />
+
+              </Routes>
+                <Player track={currentTrack} />
+            </>
           </div>
 
           {/* Player always visible when logged in */}
-          <Player track={currentTrack} />
         </div>
       ) : (
         // <LoginSignup />

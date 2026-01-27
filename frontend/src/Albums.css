@@ -87,3 +87,76 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Tablets */
+@media (max-width: 768px) {
+  .albums-page {
+    padding: 16px;
+    gap: 18px;
+  }
+
+  .albums-page h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .album-card {
+    border-radius: 14px;
+    padding: 10px;
+  }
+
+  .album-card p {
+    font-size: 14px;
+  }
+
+  .albumImage::after {
+    font-size: 36px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .albums-page {
+    padding: 12px;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .albums-page h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .album-card {
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .albumImage {
+    border-radius: 12px;
+  }
+
+  .albumImage::after {
+    font-size: 32px;
+  }
+
+  .album-card p {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+}
+
+/* Large screens / desktops */
+@media (min-width: 1024px) {
+  .albums-page {
+    gap: 26px;
+  }
+
+  .albums-page h2 {
+    font-size: 28px;
+  }
+
+  .album-card p {
+    font-size: 16px;
+  }
+}

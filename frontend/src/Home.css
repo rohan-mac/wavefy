@@ -448,3 +448,111 @@ img {
 
 
 
+
+
+@media (max-width: 1024px) {
+  .hero,
+  .hero-section {
+    height: 70vh;
+    padding: 0 6%;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .section {
+    padding: 40px 6%;
+  }
+
+  .album-grid,
+  .all-Tracks-inner {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 18px;
+  }
+
+  .song-banner {
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* HERO */
+  .hero,
+  .hero-section {
+    height: auto;
+    padding: 60px 5% 50px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 40px 5%;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* GRIDS */
+  .album-grid,
+  .all-Tracks-inner {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  /* SONG CARD */
+  .song-banner {
+    height: 150px;
+  }
+
+  /* Disable hover-only UI on mobile */
+  .song-banner::after {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .album-grid,
+  .all-Tracks-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .song-banner {
+    height: 130px;
+  }
+
+  .song-info h4 {
+    font-size: 0.85rem;
+  }
+
+  .song-info span {
+    font-size: 0.75rem;
+  }
+}

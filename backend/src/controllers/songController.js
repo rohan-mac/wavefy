@@ -4,11 +4,49 @@ import Song from "../models/song.js";
 import cloudinary from "../config/cloudinary.js";
 
 /* ========== CREATE SONG ========== */
+// export const createSong = async (req, res, next) => {
+//   try {
+//     const { title } = req.body;
+
+//     // Parse artists array
+//     const artists = JSON.parse(req.body.artists);
+
+//     if (!req.files?.audio || !req.files?.image) {
+//       return res.status(400).json({ error: "Audio and image required" });
+//     }
+
+//     // Upload audio
+//     const audioUpload = await cloudinary.uploader.upload(
+//       req.files.audio[0].path,
+//       { resource_type: "video" }
+//     );
+
+//     // Upload image
+//     const imageUpload = await cloudinary.uploader.upload(
+//       req.files.image[0].path
+//     );
+
+//     const song = await Song.create({
+//       title,
+//       artists,
+//       audioUrl: audioUpload.secure_url,
+//       imageUrl: imageUpload.secure_url,
+//       duration: audioUpload.duration,
+//     });
+
+//     res.status(201).json(song);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+import Artist from "../models/artists.js";
+
 export const createSong = async (req, res, next) => {
   try {
     const { title } = req.body;
 
-    // Parse artists array
+    // artists is an ARRAY of artist names
     const artists = JSON.parse(req.body.artists);
 
     if (!req.files?.audio || !req.files?.image) {
@@ -26,6 +64,7 @@ export const createSong = async (req, res, next) => {
       req.files.image[0].path
     );
 
+    // 1️⃣ Create song
     const song = await Song.create({
       title,
       artists,
@@ -33,6 +72,14 @@ export const createSong = async (req, res, next) => {
       imageUrl: imageUpload.secure_url,
       duration: audioUpload.duration,
     });
+
+    // 2️⃣ ADD SONG TO ARTISTS (CORE LOGIC)
+    if (Array.isArray(artists) && artists.length > 0) {
+      await Artist.updateMany(
+        { name: { $in: artists } },          // match artist names
+        { $addToSet: { songs: song._id } }   // prevent duplicates
+      );
+    }
 
     res.status(201).json(song);
   } catch (error) {

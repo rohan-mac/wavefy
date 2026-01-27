@@ -87,3 +87,76 @@
 .message.error {
   color: #ef4444;
 }
+
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+  .add-song-container {
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .add-song-container h2 {
+    font-size: 20px;
+  }
+
+  .add-song-form input[type="text"] {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .add-song-form button {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .add-song-container {
+    max-width: 95%;
+    margin: 24px auto;
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .add-song-container h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .add-song-form {
+    gap: 12px;
+  }
+
+  .add-song-form input[type="text"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .file-input {
+    font-size: 12px;
+  }
+
+  .file-input input {
+    padding: 10px;
+  }
+
+  .add-song-form button {
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .message {
+    font-size: 13px;
+  }
+}
+
+/* Large screens (optional polish) */
+@media (min-width: 1024px) {
+  .add-song-container {
+    max-width: 460px;
+  }
+}

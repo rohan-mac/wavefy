@@ -39,19 +39,19 @@ const Player = ({ track }) => {
     <div className="player">
       <audio
         ref={audioRef}
-        src={track?.audioUrl}
+        src={track?.audioUrl ||track?.Url}
         onTimeUpdate={handleTimeUpdate}
       />
 
       {/* Song Info */}
       <div className="player-info">
         <img
-          src={track?.imageUrl || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+          src={track?.imageUrl || track?.Image || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
           alt="cover"
         />
         <div>
-          <h4>{track?.title || "No song playing"}</h4>
-          <span>{track?.artists?.[0] || "Select a song"}</span>
+          <h4>{track?.title || track?.Name|| "No song playing"}</h4>
+          <span>{track?.artists?.[0] || track?.Artists?.[0] || "Select a song"}</span>
         </div>
       </div>
 

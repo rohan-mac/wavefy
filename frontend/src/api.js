@@ -1,47 +1,75 @@
 
+const BASE_URL = "https://wavefy.onrender.com/api";
 
-export async function SignupUser(params) {
-  try {
-    console.log(params);
-    
-    const response = await fetch(
-      "https://wavefy.onrender.com/api/users/register",
-      // "http://localhost:5000/api/users/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(params),
-      }
-    );
+// export async function SignupUser(params) {
+//   try {
+//     console.log(params);
 
-    // handle API errors
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.msg || "Signup failed");
-    }
+//     const response = await fetch(
+//       // `${BASE_URL}/users/register`,
+//       "http://localhost:5000/api/users/register",
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(params),
+//       }
+//     );
 
-    const data = await response.json();
-    console.log(data);
+//     // handle API errors
+//     if (!response.ok) {
+//       const errorData = await response.json();
+//       throw new Error(errorData.msg || "Signup failed");
+//     }
 
-    if (data?.token) {
-      localStorage.setItem("wavefytoken", data.token);
-    }
+//     const data = await response.json();
+//     console.log(data);
 
-    return data;
-  } catch (error) {
-    console.error("error in signup function:", error.message);
-    return { error: error.message };
+// if (data?.token) {
+//   localStorage.setItem("wavefytoken", data.token);
+// }
+
+//     return data;
+//   } catch (error) {
+//     console.error("error in signup function:", error.message);
+//     return { error: error.message };
+//   }
+// }
+
+
+/* ===================== SIGNUP ===================== */
+export const SignupUser = async (data) => {
+  const formData = new FormData();
+
+  formData.append("name", data.name);
+  formData.append("email", data.email);
+  formData.append("password", data.password);
+
+  if (data.profileImage) {
+    formData.append("profileImage", data.profileImage);
   }
-}
 
+  const response = await fetch(`http://localhost:5000/api/users/register`, {
+    method: "POST",
+    body: formData, // ❗ DO NOT set headers
+  });
 
+  if (response?.token) {
+    localStorage.setItem("wavefytoken", response.token);
+  }
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err.msg || "Signup failed");
+  }
+
+  return response.json();
+};
 
 export async function loginUser(params) {
   try {
 
-    const response = await fetch("https://wavefy.onrender.com/api/users/login", {
+    const response = await fetch(`${BASE_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,12 +92,6 @@ export async function loginUser(params) {
       localStorage.setItem("wavefytoken", data.token);
     }
 
-    // if (data?.token) {
-    //   document.cookie = `wavefytoken=${data.token}; path=/; max-age=${60 * 60 * 24}`;
-    // }
-
-
-
     return data;
   } catch (error) {
     console.error("error in login function:", error.message);
@@ -84,7 +106,7 @@ export async function fetchUserProfile() {
     if (!token) {
       throw new Error("No token found");
     }
-    const response = await fetch("https://wavefy.onrender.com/api/users/allusers", {
+    const response = await fetch(`${BASE_URL}/users/allusers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -139,6 +161,8 @@ export async function getArtists() {
       body: JSON.stringify({})
     })
     let array = await response.json();
+    console.log(array);
+    
     return array;
   } catch (error) {
     console.log(error);
@@ -161,3 +185,5 @@ export async function getAlbums() {
     console.log(error);
   }
 }
+
+

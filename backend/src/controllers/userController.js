@@ -2,6 +2,8 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 import cloudinary from "../config/cloudinary.js";
+import Song from "../models/song.js";
+
 /* ================= REGISTER ================= */
 export const registerUser = async (req, res, next) => {
   try {
@@ -21,19 +23,14 @@ export const registerUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
 
+    let userprofileImage = "";
 
-    // const imageUpload = await cloudinary.uploader.upload(req.files.profileImage[0].path);
-    // const userprofileImage = imageUpload.secure_url;
-
-
-    // let userprofileImage = "";
-
-    // if (req.files?.profileImage?.length) {
-    //   const imageUpload = await cloudinary.uploader.upload(
-    //     req.files.profileImage[0].path
-    //   );
-    //   userprofileImage = imageUpload.secure_url;
-    // }
+    if (req.files?.profileImage?.length) {
+      const imageUpload = await cloudinary.uploader.upload(
+        req.files.profileImage[0].path
+      );
+      userprofileImage = imageUpload.secure_url; // ✅ THIS IS THE URL
+    }
 
 
     const user = await User.create({
@@ -45,7 +42,7 @@ export const registerUser = async (req, res, next) => {
       favouriteAlbums: [],
       favouriteArtists: [],
       recentlyPlayed: [],
-      // profileImage: userprofileImage,
+      profileImage: userprofileImage,
     });
 
     console.log("User created:", user);
@@ -58,7 +55,7 @@ export const registerUser = async (req, res, next) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        profileImage: user.profileImage,
+        profileImage: userprofileImage
       },
     });
   } catch (error) {
@@ -67,6 +64,72 @@ export const registerUser = async (req, res, next) => {
   }
 
 };
+
+
+// export const registerUser = async (req, res) => {
+//   try {
+//     console.log("✅ Register endpoint hit");
+
+//     let { name, email, password } = req.body;
+
+//     if (!name || !email || !password) {
+//       return res.status(400).json({ msg: "All fields are required" });
+//     }
+
+//     email = email.toLowerCase();
+
+//     const userExists = await User.findOne({ email });
+//     if (userExists) {
+//       return res.status(400).json({ msg: "User already exists" });
+//     }
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     let userprofileImage = "";
+
+//     if (req.files?.profileImage?.length) {
+//       try {
+//         const imageUpload = await cloudinary.uploader.upload(
+//           req.files.profileImage[0].path,
+//           { folder: "wavefy/users" }
+//         );
+//         userprofileImage = imageUpload.secure_url;
+//       } catch (uploadError) {
+//         console.error("Cloudinary error:", uploadError);
+//         return res.status(500).json({ msg: "Image upload failed" });
+//       }
+//     }
+
+//     const user = await User.create({
+//       name,
+//       email,
+//       password: hashedPassword,
+//       profileImage: userprofileImage,
+//       playlists: [],
+//       favouriteSongs: [],
+//       favouriteAlbums: [],
+//       favouriteArtists: [],
+//       recentlyPlayed: [],
+//     });
+
+//     const token = generateToken(user._id);
+
+//     res.status(201).json({
+//       msg: "User registered successfully",
+//       token,
+//       user: {
+//         id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         profileImage: user.profileImage,
+//       },
+//     });
+
+//   } catch (error) {
+//     console.error("❌ Register error:", error);
+//     res.status(500).json({ msg: "Registration failed" });
+//   }
+// };
 
 
 /* ================= LOGIN ================= */
@@ -224,3 +287,77 @@ export const getAllUsers = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch users" });
   }
 };
+
+
+
+
+
+// export async function addUserFaurout(req, res) {
+//   try {
+//     const userId = req.user._id; // from authMiddleware
+//     const songId = req.params.songId;
+
+//     const song = await Song.findById(songId);
+//     if (!song) {
+//       return res.status(404).json({ message: "Song not found" });
+//     }
+
+//     console.log("User ID:", userId, "Song ID:", song);
+//     const user = await User.findById(userId);
+
+//     // Check if song already exists in favourites
+//     if (user.favouriteSongs.includes(songId)) {
+//       return res.status(400).json({ message: "Song already in favourites" });
+//     }
+
+//     user.favouriteSongs.push(song);
+//     await user.save();
+
+//     res.status(200).json({ message: "Song added to favourites", favouriteSongs: user.favouriteSongs });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+// // Add a song to favourites
+// router.post("/favourite/:songId", authMiddleware,
+
+
+// export default router;
+
+
+export async function addUserFavourite(req, res) {
+  try {
+    const userId = req.user._id;
+    const songId = req.params.songId;
+
+    const song = await Song.findById(songId);
+    if (!song) return res.status(404).json({ message: "Song not found" });
+
+    const user = await User.findById(userId);
+
+    // Check if song already exists in favourites
+    if (user.favouriteSongs.some(s => s._id?.toString() === song._id.toString())) {
+      return res.status(400).json({ message: "Song already in favourites" });
+    }
+
+    // Push full song object
+    user.favouriteSongs.push({
+      _id: song._id,
+      title: song.title,
+      artist: song.artists,
+      // album: song.album,
+      imageUrl: song.imageUrl,
+      songUrl: song.songUrl,
+      duration: song.duration,
+    });
+
+    await user.save();
+
+    res.status(200).json({ message: "Song added to favourites", favouriteSongs: user.favouriteSongs });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+}

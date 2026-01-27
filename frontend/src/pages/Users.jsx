@@ -1,62 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserProfile } from "../api";
 import "../Users.css";
+
 const Users = () => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getProfile = async () => {
-            const data = await fetchUserProfile();
+  useEffect(() => {
+    const getProfile = async () => {
+      const data = await fetchUserProfile();
 
-            if (data?.error) {
-                console.log("Error fetching user profile:", data.error);
-            } else {
-                console.log("User profile data:", data);
-                setUserData(data);
-            }
+      if (data?.error) {
+        console.error("Error fetching user profile:", data.error);
+      } else {
+        setUserData(data);
+      }
 
-            setLoading(false);
-        };
+      setLoading(false);
+    };
 
-        getProfile();
-    }, []); // ✅ RUN ONLY ONCE
-    console.log("User Data:", userData);
-    if (loading) return <h2>Loading...</h2>;
-    if (!userData) return <h2>No user found</h2>;
+    getProfile();
+  }, []);
 
-    return (
-        <div>
-            <h2>User Profile</h2>
+  if (loading) return <h2>Loading...</h2>;
+  if (!userData || userData.length === 0) return <h2>No users found</h2>;
 
-            <div>
-                <h3>All Users:</h3>
-                <ul>
-                    {userData.length > 0 ? (
-                        userData.map((user) => (
-                            <li key={user._id}>
-
-                                <div className="userProfile">
-                                    <img src={user.profileImage} alt="profile pic" width="50px" height="50px" /><br />
-
-                                </div>
-                                <div>
-                                    Name: {user.name} <br />
-                                    Email: {user.email} <br />
-                                </div>
-                                <div>
-                                    Role: {user.role} <br />
-
-                                </div>
-                            </li>
-                        ))
-                    ) : (
-                        <p>No users found.</p>
-                    )}
-                </ul>
+  return (
+    <div className="users-container">
+      {/* <h2>User Profiles</h2> */}
+      <ul className="user-list">
+        {userData.map((user) => (
+          <li key={user._id} className="user-card">
+            <div className="userProfile">
+              <img
+                src={user.profileImage}
+                alt={`${user.name} profile`}
+                className="profile-img"
+              />
             </div>
-        </div>
-    );
+            <div className="user-info">
+              <p><strong>Name:</strong> {user.name}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Role:</strong> {user.role}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Users;

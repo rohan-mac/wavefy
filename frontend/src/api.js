@@ -150,7 +150,7 @@ export async function updateUserRoleByAdmin({ id, role }) {
     const token = localStorage.getItem("wavefytoken");
     if (!token) throw new Error("No token found");
 
-    const response = await fetch(`${BASE_URL}F/users/updateuserrole`, {
+    const response = await fetch(`${BASE_URL}/users/updateuserrole`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -61,12 +61,12 @@ const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
                   height="100%"
                 />
               </div>
-              <span className="song-name">{song.Name || "Unknown Song"}</span>
+              <span className="song-name">{song.title || "Unknown Song"}</span>
             </div>
 
             <div className="song-info">
               {/* optional artist info */}
-              <button onClick={() => handleLikeSong(song._id)}>❤️ Like</button>
+              {/* <button onClick={() => handleLikeSong(song._id)}>❤️ Like</button> */}
 
             </div>
 

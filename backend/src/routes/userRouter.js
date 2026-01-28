@@ -8,6 +8,7 @@ import {
   allUser,
   getAllUsers,
   addUserFavourite,
+  updateUserRole,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { upload } from "../middleware/multer.middleware.js";
@@ -24,7 +25,8 @@ router.post(
 router.post("/login", loginUser);
 
 router.get("/profile", protect, getProfile);
-router.put("/profile", protect, updateUser); // ✅ UPDATE
+router.put("/updateuser", protect, upload.single("image"), updateUser);
+router.put("/updateuserrole", protect, updateUserRole);
 router.delete("/:id", protect, deleteUser);
 router.get("/allusers", getAllUsers);
 router.post("/favourite/:songId", protect, addUserFavourite);

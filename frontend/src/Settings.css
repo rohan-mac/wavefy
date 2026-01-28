@@ -1,0 +1,201 @@
+/* Main container - centered and clean */
+.setting-main-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #0D1322;
+    /* Primary Dark */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #FFFFFF;
+}
+
+/* Card wrapper - Instagram uses a border rather than a heavy shadow */
+.setting-wrapper {
+    width: 100%;
+    max-width: 600px;
+    background-color: #0D1322;
+    /* Matches BG for seamless look or use #1B1F38 */
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header - Left aligned like IG mobile settings */
+.setting-wrapper h2 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+/* Profile Image Section - Modern IG style */
+.profile-image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #1B1F38; */
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.preview-image {
+    width: 200px;
+    height: 200px;
+}
+
+.profile-image {
+    /* width: 60px; */
+    /* Smaller, more refined circle */
+    /* height: 60px; */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #1B1F38;
+}
+
+/* "Change Profile Photo" text link style */
+.profile-image-preview input[type="file"] {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #0095f6;
+    /* Action Blue */
+    font-weight: 600;
+}
+
+/* Form Layout */
+form {
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+/* Input Fields - Clean, bordered style */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #1B1F38;
+    /* Subtle separation */
+    border-radius: 6px;
+    background-color: #1B1F38;
+    /* Slightly lighter input area */
+    color: #FFFFFF;
+    font-size: 16px;
+    /* Prevents iOS zoom on focus */
+}
+
+form input:focus {
+    border-color: #0095f6;
+    outline: none;
+}
+
+/* Submit Button - Instagram "Primary" button */
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0095f6;
+    color: #FFFFFF;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #1B1F38;
+    /* Reversing for interaction */
+    border: 1px solid #0095f6;
+}
+
+/* Status Message - Clean and center */
+.status-message {
+    font-size: 13px;
+    color: #0095f6;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ... (Keep your existing styles above) ... */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .setting-wrapper {
+        max-width: 90%;
+        /* Slight breathing room on tablets */
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .preview-image {
+        width: 150px;
+        /* Scale down large preview */
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .setting-main-container {
+        background-color: #0D1322;
+        /* Ensure background stays dark */
+    }
+
+    .setting-wrapper {
+        max-width: 100%;
+        margin-top: 0;
+        /* Remove top margin for "app" feel */
+        border-radius: 0;
+        /* Full width looks better without rounded corners on mobile */
+        padding: 20px 15px;
+    }
+
+    .setting-wrapper h2 {
+        font-size: 18px;
+        /* Slightly smaller header */
+        margin-bottom: 20px;
+    }
+
+    .preview-image {
+        width: 120px;
+        /* Mobile-friendly profile size */
+        height: 120px;
+    }
+
+    /* Stack the file input more cleanly */
+    .profile-image-preview {
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .profile-image-preview input[type="file"] {
+        margin-left: 0;
+        font-size: 13px;
+    }
+
+    /* Larger touch targets for mobile inputs */
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form select {
+        padding: 12px;
+        font-size: 14px;
+        /* Adjust to 16px if you want to avoid auto-zoom on iPhone */
+    }
+
+    form button {
+        padding: 14px;
+        font-size: 15px;
+    }
+}

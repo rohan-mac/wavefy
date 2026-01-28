@@ -1,0 +1,223 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #020617;
+  border-right: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* ================= LOGO ================= */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.app-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1db954;
+}
+
+/* ================= MENU ================= */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.menu-item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Hover */
+.menu-item:hover {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+/* Active */
+.menu-item.active {
+  background-color: #1db954;
+  color: #020617;
+  font-weight: 600;
+}
+
+.menu-item.active svg {
+  transform: scale(1.1);
+}
+
+/* ================= ADMIN ================= */
+.admin-section {
+  margin-top: 12px;
+}
+
+.admin-divider {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin: 12px 0 6px 10px;
+  letter-spacing: 1px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #1e293b;
+  margin: 12px 0;
+}
+
+/* ================= FOOTER ================= */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #1e293b;
+}
+
+/* ================================================= */
+/* ================= TABLET ======================== */
+/* ================================================= */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 80px;
+    padding: 14px 8px;
+    align-items: center;
+  }
+
+  .sidebar-logo {
+    justify-content: center;
+  }
+
+  .app-name {
+    display: none; /* 🔥 hide text */
+  }
+
+  .menu-item {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .menu-item span {
+    display: none; /* 🔥 ICON ONLY */
+  }
+
+  /* .admin-divider,
+  hr {
+    display: block;
+  } */
+}
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+@media (max-width: 768px) {
+  /* Bottom Navigation */
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    width: 100%;
+    flex-direction: row;
+    padding: 0;
+    border-right: none;
+    border-top: 1px solid #1e293b;
+    z-index: 1000;
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .menu-item {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 10px;
+  }
+
+  .menu-item svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .menu-item span {
+    display: none; /* 🔥 ICON ONLY */
+  }
+/* 
+  .admin-section,
+  .sidebar-footer {
+    display: none;
+  } */
+   .admin-fab {
+    position: fixed;
+    right: 16px;
+    bottom: 90px; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1200;
+  }
+
+  .admin-fab .menu-item {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #1db954;
+    color: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .admin-fab .menu-item svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Hide text just in case */
+  .admin-fab .menu-item span {
+    display: none;
+  }
+
+
+  
+}

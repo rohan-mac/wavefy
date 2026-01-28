@@ -63,6 +63,16 @@ export async function loginUser(params) {
   }
 };
 
+export async function logoutUser() {
+  try {
+    localStorage.removeItem("wavefytoken");
+    return { message: "Logout successful" };
+  } catch (error) {
+    console.error("logoutUser error:", error);
+    return { error: error.message };
+  }
+};
+
 
 export async function fetchUserProfile() {
   try {
@@ -87,6 +97,77 @@ export async function fetchUserProfile() {
   }
 };
 
+
+export async function deleteUserAccount(id) {
+  try {
+    const token = localStorage.getItem("wavefytoken");
+    if (!token) throw new Error("No token found");
+
+    const response = await fetch(`${BASE_URL}/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) throw new Error("Failed to delete account");
+
+    const data = await response.json();
+    console.log("deleteUserAccount response data:", data);
+  } catch (error) {
+    console.error("deleteUserAccount error:", error);
+    return { error: error.message };
+  }
+};
+
+export async function updateUserProfile(formData) {
+  try {
+    const token = localStorage.getItem("wavefytoken");
+    if (!token) throw new Error("No token found");
+
+    const response = await fetch(`${BASE_URL}/users/updateuser`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ do NOT set Content-Type
+      },
+      body: formData,
+    });
+
+    if (!response.ok) throw new Error("Failed to update profile");
+
+    const data = await response.json();
+    console.log("updateUserProfile response data:", data);
+  } catch (error) {
+    console.error("updateUserProfile error:", error);
+    return { error: error.message };
+  }
+}
+
+export async function updateUserRoleByAdmin({ id, role }) {
+  try {
+    console.log("updateUserRoleByAdmin called with:", { id, role });
+
+    const token = localStorage.getItem("wavefytoken");
+    if (!token) throw new Error("No token found");
+
+    const response = await fetch(`${BASE_URL}F/users/updateuserrole`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id, role }),
+    });
+
+    if (!response.ok) throw new Error("Failed to update user role");
+
+    const data = await response.json();
+    console.log("updateUserRoleByAdmin response data:", data);
+  } catch (error) {
+    console.error("updateUserRoleByAdmin error:", error);
+    return { error: error.message };
+  }
+}
 
 export async function getAllTracks() {
   try {

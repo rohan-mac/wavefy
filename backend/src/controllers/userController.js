@@ -193,44 +193,110 @@ export const logoutUser = async (req, res) => {
 
 
 
-export const updateUser = async (req, res, next) => {
-  try {
-    const userId = req.user._id;
-    const { name, password, profileImage, preferences } = req.body;
+// export const updateUser = async (req, res, next) => {
+//   try {
+//     const {id} = req.body;
+//     console.log("Update user endpoint hit for user ID:", id);
+//     const { name, password, profileImage, preferences } = req.body;
 
-    const user = await User.findById(userId);
+//     const user = await User.findById(id);
+//     if (!user) {
+//       return res.status(404).json({ msg: 'User not found' });
+//     }
+
+//     if (name) user.name = name;
+//     if (profileImage) user.profileImage = profileImage;
+//     if (preferences) {
+//       user.preferences = { ...user.preferences, ...preferences };
+//     }
+
+//     if (req.files && req.files.image) {
+//       try {
+//         const imageUpload = await cloudinary.uploader.upload(req.files.image[0].path);
+//         user.profileImage = imageUpload.secure_url;
+//       } catch (error) {
+//         return res.status(400).json({ msg: 'Image upload failed' });
+//       }
+//     }
+
+//     if (password) {
+//       try {
+//         const hashedPassword = await bcrypt.hash(password, 10);
+//         user.password = hashedPassword;
+//       } catch (error) {
+//         return res.status(500).json({ msg: 'Password update failed' });
+//       }
+//     }
+
+//     await user.save();
+
+//     res.status(200).json({
+//       msg: 'Profile updated successfully',
+//       user: {
+//         id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         profileImage: user.profileImage,
+//         preferences: user.preferences,
+//       },
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ msg: 'Internal Server Error' });
+//   }
+// }
+
+
+export const updateUser = async (req, res) => {
+  try {
+    const id = req.user._id.toString();
+    console.log("Update user endpoint hit for user ID:", id);
+
+
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
+    const { name, password } = req.body;
+
+    let preferences = {};
+    if (req.body.preferences) {
+      preferences = JSON.parse(req.body.preferences);
+    }
+
+    const user = await User.findById(id);
     if (!user) {
-      return res.status(404).json({ msg: 'User not found' });
+      return res.status(404).json({ msg: "User not found" });
     }
 
     if (name) user.name = name;
-    if (profileImage) user.profileImage = profileImage;
+
     if (preferences) {
-      user.preferences = { ...user.preferences, ...preferences };
+      user.preferences = {
+        ...user.preferences,
+        ...preferences,
+      };
     }
 
-    if (req.files && req.files.image) {
+    // ✅ Image upload (multer + cloudinary)
+    if (req.file) {
       try {
-        const imageUpload = await cloudinary.uploader.upload(req.files.image[0].path);
-        user.profileImage = imageUpload.secure_url;
+        const uploadResult = await cloudinary.uploader.upload(req.file.path);
+        user.profileImage = uploadResult.secure_url;
       } catch (error) {
-        return res.status(400).json({ msg: 'Image upload failed' });
+        return res.status(400).json({ msg: "Image upload failed" });
       }
     }
 
+    // ✅ Password update
     if (password) {
-      try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        user.password = hashedPassword;
-      } catch (error) {
-        return res.status(500).json({ msg: 'Password update failed' });
-      }
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
     }
 
     await user.save();
 
     res.status(200).json({
-      msg: 'Profile updated successfully',
+      msg: "Profile updated successfully",
       user: {
         id: user._id,
         name: user.name,
@@ -239,12 +305,28 @@ export const updateUser = async (req, res, next) => {
         preferences: user.preferences,
       },
     });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ msg: 'Internal Server Error' });
+    res.status(500).json({ msg: "Internal Server Error" });
   }
-}
+};
 
+export const updateUserRole = async (req, res, next) => {
+  try {
+    const { id, role } = req.body;
+    console.log("Update user role endpoint hit for user ID:", id);
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    user.role = role;
+    await user.save();
+    res.status(200).json({ msg: 'User role updated successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const deleteUser = async (req, res, next) => {
   try {

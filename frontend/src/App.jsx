@@ -15,6 +15,7 @@ import AddSong from "./pages/AddSong";
 import Users from "./pages/Users";
 import Songs from "./pages/Songs";
 import AddArtist from "./pages/AddArtist";
+import Settings from "./pages/Setting";
 
 // let isadmin = false
 
@@ -48,7 +49,6 @@ const App = () => {
         setUserIsLoggedIn(true);
         if (data.role === "admin") {
           setIsAdmin(true)
-          // isadmin = true
         }
 
 
@@ -87,6 +87,7 @@ const App = () => {
   //     });
   // }, []);
 
+  console.log(user);
 
 
   return (
@@ -112,6 +113,7 @@ const App = () => {
                   path="/artist/:id"
                   element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
                 />
+                <Route path="/settings" element={<Settings user={user} />} />
                 <Route
                   path="/albums/:id"
                   element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
@@ -121,7 +123,13 @@ const App = () => {
                 <Route path="/songs" element={<Songs />} />
                 <Route path="/addartist" element={<AddArtist />} />
               </Routes>
-                <Player track={currentTrack} />
+              {/* {
+                currentTrack && <Player track={currentTrack} />
+              } */}
+              <div className={`player-wrapper ${currentTrack ? "show" : ""}`}>
+                {currentTrack && <Player track={currentTrack} />}
+              </div>
+
             </>
           </div>
 

@@ -39,7 +39,7 @@ const Player = ({ track }) => {
     <div className="player">
       <audio
         ref={audioRef}
-        src={track?.audioUrl ||track?.Url}
+        src={track?.audioUrl || track?.Url}
         onTimeUpdate={handleTimeUpdate}
       />
 
@@ -50,21 +50,21 @@ const Player = ({ track }) => {
           alt="cover"
         />
         <div>
-          <h4>{track?.title || track?.Name|| "No song playing"}</h4>
+          <h4>{track?.title || track?.Name || "No song playing"}</h4>
           <span>{track?.artists?.[0] || track?.Artists?.[0] || "Select a song"}</span>
         </div>
       </div>
 
       {/* Controls */}
       <div className="player-controls">
-<div onClick={togglePlay} className="play-pause-button">
-    
-        <button>⏮</button>
-        <button className="play" onClick={togglePlay}>
-          {isPlaying ? "❚❚" : "▶"}
-        </button>
-        <button>⏭</button>
-       </div> 
+        <div onClick={togglePlay} className="play-pause-button">
+
+          <button>⏮</button>
+          <button className="play" onClick={togglePlay}>
+            {isPlaying ? "❚❚" : "▶"}
+          </button>
+          <button>⏭</button>
+        </div>
 
         <input
           type="range"

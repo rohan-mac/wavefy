@@ -137,6 +137,7 @@ export async function updateUserProfile(formData) {
 
     const data = await response.json();
     console.log("updateUserProfile response data:", data);
+    return data;
   } catch (error) {
     console.error("updateUserProfile error:", error);
     return { error: error.message };

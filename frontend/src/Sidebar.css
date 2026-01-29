@@ -126,6 +126,86 @@ hr {
   background: linear-gradient(180deg, #22c55e, #15803d);
 }
 
+.brand-logo {
+  display: flex;
+  margin: 0;
+  border-radius: 31px;
+  width: 30%;
+}
+
+img.logo-image {
+  border-radius: 29px;
+  animation: spin 3s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logo animation */
+.logo-image {
+  width: 36px;
+  height: 36px;
+  animation: logoPop 0.8s ease-out forwards;
+}
+
+@keyframes logoPop {
+  from {
+    transform: scale(0.6) rotate(-10deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* App name container */
+.app-name {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  color: #f6f7f8;
+}
+
+/* Individual letter animation */
+.app-name span {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: letterReveal 0.5s ease forwards;
+  animation-delay: calc(0.08s * var(--i));
+}
+
+@keyframes letterReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
 
 
 /* ================================================= */
@@ -143,7 +223,8 @@ hr {
   }
 
   .app-name {
-    display: none; /* 🔥 hide text */
+    display: none;
+    /* 🔥 hide text */
   }
 
   .menu-item {
@@ -152,7 +233,8 @@ hr {
   }
 
   .menu-item span {
-    display: none; /* 🔥 ICON ONLY */
+    display: none;
+    /* 🔥 ICON ONLY */
   }
 
   /* .admin-divider,
@@ -165,6 +247,7 @@ hr {
 /* ================= MOBILE ======================== */
 /* ================================================= */
 @media (max-width: 768px) {
+
   /* Bottom Navigation */
   .sidebar {
     position: fixed;
@@ -180,9 +263,9 @@ hr {
     z-index: 1000;
   }
 
-  .sidebar-logo {
+  /* .sidebar-logo {
     display: none;
-  }
+  } */
 
   .sidebar-menu {
     flex-direction: row;
@@ -203,17 +286,19 @@ hr {
   }
 
   .menu-item span {
-    display: none; /* 🔥 ICON ONLY */
+    display: none;
+    /* 🔥 ICON ONLY */
   }
-/* 
+
+  /* 
   .admin-section,
   .sidebar-footer {
     display: none;
   } */
-   .admin-fab {
+  .admin-fab {
     position: fixed;
     right: 16px;
-    bottom: 90px; 
+    bottom: 90px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -244,5 +329,5 @@ hr {
   }
 
 
-  
+
 }

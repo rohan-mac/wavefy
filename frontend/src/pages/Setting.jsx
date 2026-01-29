@@ -131,23 +131,22 @@ const Settings = ({ user }) => {
         try {
             const formData = new FormData();
             formData.append("name", name);
-
             if (password) formData.append("password", password);
             formData.append("preferences", JSON.stringify({ theme }));
             if (image) formData.append("image", image);
 
-            for (let [key, value] of formData.entries()) {
-                console.log(key, value);
-            }
 
             const res = await updateUserProfile(formData);
+            // console.log("Updating name to:", "🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️");
 
+            console.log("Response from updateUserProfile:", res);
             if (res.error) {
-                setMessage("❌ Failed to update profile");
+                setMessage("❌ Failed to updatddmfldlfme profile");
             } else {
-                setMessage("✅ Profile updated successfully");
+                setMessage("✅ Profile updatamed successfully");
                 setPassword("");
             }
+
         } catch (err) {
             console.error(err);
             setMessage("❌ Failed to update profile");

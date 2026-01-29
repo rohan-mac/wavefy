@@ -123,7 +123,7 @@ const Users = () => {
                 <p><strong>Name:</strong> {user.name}</p>
                 <p><strong>Email:</strong> {user.email}</p>
                 <p><strong>Role:</strong> {user.role}</p>
-                {/* <p>{user._id}</p> */}
+                <p><strong>Created At:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
               </div>
             </div>
 

@@ -17,7 +17,6 @@ import Songs from "./pages/Songs";
 import AddArtist from "./pages/AddArtist";
 import Settings from "./pages/Setting";
 
-// let isadmin = false
 
 const App = () => {
 
@@ -29,7 +28,6 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("wavefytoken");
-    // localStorage.setItem("wavefytoken","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWQ1YTRmMzY3MjEwZjc1NWJmZjE0ZiIsImlhdCI6MTc2NzcyNTY0NywiZXhwIjoxNzY4MzMwNDQ3fQ.YvgT09aFAVWjwIHN8hRtH-ltunKSA0ocnSysUGY661Y")
     if (!token) {
       setUserIsLoggedIn(false);
       return;
@@ -62,32 +60,6 @@ const App = () => {
   }, []);
 
 
-  // useEffect(() => {
-  //   fetch("https://wavefy.onrender.com/api/users/profile", {
-  //     method: "GET",
-
-  //     credentials: "include", // ✅ IMPORTANT (send cookies)
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) throw new Error("Not authorized");
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setUser(data);
-  //       setUserIsLoggedIn(true);
-
-  //       if (data.role === "admin") {
-  //         setIsAdmin(true);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       setUser(null);
-  //       setUserIsLoggedIn(false);
-  //       setIsAdmin(false);
-  //     });
-  // }, []);
-
-  console.log(user);
 
 
   return (

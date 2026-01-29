@@ -1,22 +1,11 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
-import User from "./Header.User";
 import "../Sidebar.css";
-import logo from "../assets/logo.png";
-import mainLogo from "../assets/mainlogo.png";
 import image from "../assets/image.png";
 const Sidebar = ({ isadmin }) => {
   return (
     <aside className="sidebar">
       {/* Logo */}
       <div className="sidebar-logo">
-        {/* <div className="brand-logo">
-          <img src={image} alt="Logo" className="logo-image" />
-
-          <span className="app-name">MyMusic</span>
-        </div> */}
-        {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0095f6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg> */}
-
         <div className="brand-logo">
           <img src={image} alt="Logo" className="logo-image" />
 

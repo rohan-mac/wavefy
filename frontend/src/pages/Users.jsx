@@ -59,7 +59,7 @@
 // export default Users;
 
 import React, { useEffect, useState } from "react";
-import { fetchUserProfile, updateUserRoleByAdmin } from "../api";
+import { deleteUserAccount, fetchUserProfile, updateUserRoleByAdmin } from "../api";
 import "../Users.css";
 import Loader from "../Components/Loader";
 
@@ -100,7 +100,7 @@ const Users = () => {
 
   const deleteUser = async (userId) => {
     await deleteUserAccount(userId);
-    }
+  }
 
   if (loading) return <Loader />;
   if (!userData.length) return <h2>No users found</h2>;

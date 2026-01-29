@@ -1,110 +1,4 @@
-
-// import { NavLink } from "react-router-dom";
-// import User from "./Header.User";
-
-// const Sidebar = ({ isadmin }) => {
-
-//   return (
-//     <aside className="sidebar">
-
-//       {/* Logo */}
-//       <div className="sidebar-logo">
-//         <span className="app-name">MyMusic</span>
-//       </div>
-
-//       {/* Menu */}
-//       <nav className="sidebar-menu">
-//         <NavLink
-//           to="/"
-//           end
-//           className={({ isActive }) =>
-//             `menu-item ${isActive ? "active" : ""}`
-//           }
-//         >
-//           Home
-//         </NavLink>
-
-//         <NavLink
-//           to="/artists"
-//           className={({ isActive }) =>
-//             `menu-item ${isActive ? "active" : ""}`
-//           }
-//         >
-//           Artists
-//         </NavLink>
-
-//         <NavLink
-//           to="/albums"
-//           className={({ isActive }) =>
-//             `menu-item ${isActive ? "active" : ""}`
-//           }
-//         >
-//           Albums
-//         </NavLink>
-
-//         <NavLink
-//           to="/playlists"
-//           className={({ isActive }) =>
-//             `menu-item ${isActive ? "active" : ""}`
-//           }
-//         >
-//           Playlists
-//         </NavLink>
-
-//         {isadmin ? (
-//           <>
-//             <NavLink to="/users"
-//               className={({ isActive }) =>
-//                 `menu-item ${isActive ? "active" : ""}`
-//               }>
-//               Users
-//             </NavLink>
-//             <NavLink
-//               to="/songs"
-//               className={({ isActive }) =>
-//                 `menu-item ${isActive ? "active" : ""}`
-//               }
-//             >
-//               Songs
-//             </NavLink>
-//             <NavLink
-//               to="/addsong"
-//               className={({ isActive }) =>
-//                 `menu-item ${isActive ? "active" : ""}`
-//               }
-//             >
-//               Add Song
-
-//             </NavLink>
-
-//             <NavLink
-//               to="/addartist"
-//               className={({ isActive }) =>
-//                 `menu-item ${isActive ? "active" : ""}`
-//               }
-//             >
-//               Add Artist
-
-//             </NavLink>
-//           </>
-
-//         ) : (null)}
-//       </nav>
-
-//       {/* Footer */}
-//       <div className="sidebar-footer">
-//         <span>🎧 Now Playing</span>
-//       </div>
-
-//     </aside>
-//   );
-// };
-
-// export default Sidebar;
-
-
-
-
+import React from "react";
 import { NavLink } from "react-router-dom";
 import User from "./Header.User";
 import "../Sidebar.css";
@@ -163,9 +57,9 @@ const Sidebar = ({ isadmin }) => {
       </nav>
 
       {/* Footer */}
-      <div className="sidebar-footer">
-        {/* <User /> */}
-      </div>
+      {/* <div className="sidebar-footer">
+        <User />
+      </div> */}
     </aside>
   );
 };

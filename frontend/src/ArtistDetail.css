@@ -205,3 +205,72 @@
     font-size: 0.9rem;
   }
 }
+/* ===== Extra Small Devices (320px) ===== */
+@media (max-width: 320px) {
+
+  .artist-banner {
+    height: 25vh;
+    min-height: 220px;
+    padding: 0.75rem;
+  }
+
+  .artist-banner-info h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .artist-id {
+    font-size: 0.8rem;
+  }
+
+  .artist-actions {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .play-btn {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
+
+  .follow-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+
+  .artist-songs {
+    padding: 0 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .song-item {
+    padding: 8px;
+    gap: 0.5rem;
+  }
+
+  .thumblel-image img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .song-name {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+
+  .song-artist {
+    font-size: 0.7rem;
+  }
+
+  .three-dots,
+  .dots {
+    display: none;
+  }
+}

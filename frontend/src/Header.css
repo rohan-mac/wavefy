@@ -325,6 +325,12 @@ input.profileImageInput {
     display: flex;
     flex-direction: column;
 }
+.header-search {
+    width: 31%;
+    padding: 6px 10px;
+    /* display: none; */
+    overflow: hidden;
+}
   .search-btn {
     padding: 6px 8px;
     font-size: 0.8rem;
@@ -345,4 +351,51 @@ input.profileImageInput {
     width: 60px;
     z-index: 50;
 }
+}
+/* ===== Extra Small Devices (320px) ===== */
+@media (max-width: 320px) {
+
+  .header {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .logo img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-search {
+    padding: 5px 8px;
+  }
+
+  .search-input {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .search-btn {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+  }
+
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .user-info {
+    display: none; /* hide name/role on very small screens */
+  }
+
+  .user-box {
+    width: 120px;
+    padding: 8px;
+    right: -10px;
+  }
+
+  .logout-button {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
 }

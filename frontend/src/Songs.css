@@ -24,6 +24,90 @@ select {
 
 
 
+/* ===== Song Filter Wrapper ===== */
+.song-filter {
+  width: 100%;
+  max-width: 260px;
+  margin: 10px 0;
+  position: relative;
+}
+
+/* ===== Select Styling ===== */
+.song-filter select {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  transition: all 0.25s ease;
+}
+
+/* ===== Hover / Focus ===== */
+.song-filter select:hover {
+  border-color: #1db954; /* Spotify-like green */
+}
+
+.song-filter select:focus {
+  border-color: #1db954;
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
+}
+
+/* ===== Custom Dropdown Arrow ===== */
+.song-filter::after {
+  content: "▾";
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #aaa;
+  pointer-events: none;
+}
+
+/* ===== Options ===== */
+.song-filter option {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* ===== Disabled Placeholder ===== */
+.song-filter option[value=""] {
+  color: #888;
+}
+
+/* ===== Mobile (<= 480px) ===== */
+@media (max-width: 480px) {
+  .song-filter {
+    max-width: 100%;
+  }
+
+  .song-filter select {
+    font-size: 13px;
+    padding: 9px 34px 9px 12px;
+  }
+}
+
+/* ===== Tablet (<= 768px) ===== */
+@media (max-width: 768px) {
+  .song-filter {
+    max-width: 220px;
+  }
+}
+
+
+
+
+
 
 
 

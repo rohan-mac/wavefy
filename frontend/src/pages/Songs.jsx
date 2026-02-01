@@ -45,10 +45,13 @@ const Songs = ({ setCurrentTrack }) => {
 
   return (
     <div className="songs-page">
-      <h1>Songs</h1>
+      {/* <h1>Songs</h1> */}
 
-      {/* Artist dropdown */}
+<div className="song-filter">
+
       <ArtistSelect onArtistChange={handleArtistChange} />
+</div>
+      {/* Artist dropdown */}
 
       {filteredTracks.length > 0 ? (
         filteredTracks.map((song, index) => (

@@ -92,7 +92,7 @@ const App = () => {
                 />
                 <Route path="/addsong" element={<AddSong />} />
                 <Route path="/users" element={<Users />} />
-                <Route path="/songs" element={<Songs />} />
+                <Route path="/songs" element={<Songs setCurrentTrack={setCurrentTrack} />} />
                 <Route path="/addartist" element={<AddArtist />} />
               </Routes>
               {/* {

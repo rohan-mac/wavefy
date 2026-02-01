@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Songs.css";
 import { getAllTracks } from "../api";
-import axios from "axios";
 import Loader from "../Components/Loader";
-
-const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
-  const [allTracks, setAllTracks] = React.useState([]);
+import ArtistSelect from "../Components/ArtistSelect ";
+const Songs = ({ setCurrentTrack }) => {
+  const [allTracks, setAllTracks] = useState([]);
+  const [filteredTracks, setFilteredTracks] = useState([]);
+  const [selectedArtist, setSelectedArtist] = useState("");
 
   useEffect(() => {
     async function fetchTracks() {
       try {
-        const response = await getAllTracks();
+        const response = await getAllTracks(); // uses fetch internally
         setAllTracks(response.data);
+        setFilteredTracks(response.data);
       } catch (error) {
         console.error("Error fetching tracks:", error);
       }
@@ -20,34 +22,44 @@ const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
     fetchTracks();
   }, []);
 
-  const handleLikeSong = async (songId) => {
-    const token = localStorage.getItem("wavefytoken");
 
-    try {
-      const res = await axios.post(
-        `http://localhost:5000/api/users/favourite/${songId}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
 
-      console.log(res.data.message);
-    } catch (err) {
-      console.error(err.response?.data?.message || err.message);
+  const handleArtistChange = (artist) => {
+    setSelectedArtist(artist);
+
+    if (!artist) {
+      setFilteredTracks(allTracks);
+      return;
     }
+
+    const filtered = allTracks.filter((song) =>
+      song.artists?.some((a) =>
+        a.toLowerCase().includes(artist.toLowerCase())
+      ) ?? false
+    );
+
+    setFilteredTracks(filtered);
   };
 
 
-  console.log("All Tracks:", allTracks);
 
   return (
     <div className="songs-page">
       <h1>Songs</h1>
-      {allTracks.length > 0 ? (
-        allTracks.map((song, index) => (
+
+      {/* Artist dropdown */}
+      <ArtistSelect onArtistChange={handleArtistChange} />
+
+      {filteredTracks.length > 0 ? (
+        filteredTracks.map((song, index) => (
           <div
             key={index}
             className="song-item"
-            onClick={() => setCurrentTrack && setCurrentTrack(song)} // ✅ safe check
+            onClick={() => {
+              console.log(song, "song in songs ");
+
+              setCurrentTrack?.(song);
+            }}
           >
             <div className="tumbnaill">
               <div className="thumblel-image">
@@ -56,18 +68,12 @@ const Songs = ({ setCurrentTrack }) => { // ✅ receive setCurrentTrack as prop
                     song.imageUrl ||
                     "/src/assets/Gemini_Generated_Image_afrpjbafrpjbafrp.png"
                   }
-                  alt={song.Name || "song"}
-                  width="100%"
-                  height="100%"
+                  alt={song.title || "song"}
                 />
               </div>
-              <span className="song-name">{song.title || "Unknown Song"}</span>
-            </div>
-
-            <div className="song-info">
-              {/* optional artist info */}
-              {/* <button onClick={() => handleLikeSong(song._id)}>❤️ Like</button> */}
-
+              <span className="song-name">
+                {song.title || "Unknown Song"}
+              </span>
             </div>
 
             <div className="dots">

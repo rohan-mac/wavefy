@@ -7,6 +7,9 @@ const Player = ({ track }) => {
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0.7);
 
+
+  // console.log(track);
+  
   const togglePlay = () => {
     if (!track) return;
 

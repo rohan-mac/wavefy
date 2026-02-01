@@ -326,7 +326,7 @@ input.profileImageInput {
     flex-direction: column;
 }
 .header-search {
-    width: 31%;
+    /* width: 31%; */
     padding: 6px 10px;
     /* display: none; */
     overflow: hidden;

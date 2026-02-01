@@ -8,6 +8,27 @@
   color: #fff;
 }
 
+
+
+
+
+select {
+  padding: 10px;
+  border-radius: 8px;
+  background: #121212;
+  color: white;
+  border: 1px solid #333;
+}
+
+
+
+
+
+
+
+
+
+
 /* Heading */
 .songs-page h1 {
   font-size: 2rem;
@@ -26,6 +47,7 @@
   margin-bottom: 12px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
 }
 
 .song-item:hover {
@@ -84,6 +106,15 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .admin-fab {
+    position: fixed;
+    right: 10px;
+    bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1200;
+}
   .songs-page {
     padding: 16px 16px;
     padding-bottom: 140px; /* ✅ leave space for bottom player/nav */

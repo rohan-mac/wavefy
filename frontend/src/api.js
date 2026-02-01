@@ -232,3 +232,23 @@ export async function getAlbums() {
   }
 };
 
+export async function getAllArtist() {
+  try {
+    const response = await fetch(`${BASE_URL}/artists`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching artists:", error);
+    return null; // or []
+  }
+}

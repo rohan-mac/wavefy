@@ -220,6 +220,9 @@ img.logo-image {
 
   .sidebar-logo {
     justify-content: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .app-name {
@@ -267,6 +270,15 @@ img.logo-image {
     display: none;
   } */
 
+
+  .sidebar-logo {
+    justify-content: center;
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    /* background: bisque; */
+    align-items: flex-start;
+}
   .sidebar-menu {
     flex-direction: row;
     width: 100%;

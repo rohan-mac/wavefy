@@ -20,7 +20,6 @@ import Settings from "./pages/Setting";
 
 const App = () => {
 
-
   const [currentTrack, setCurrentTrack] = useState(null);
   const [user, setUser] = useState(null);
   const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
@@ -75,7 +74,6 @@ const App = () => {
           <div className="main-container">
             <>
               <Header user={user} />
-
               <Routes>
                 <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
                 <Route path="/artists" element={<Artists />} />

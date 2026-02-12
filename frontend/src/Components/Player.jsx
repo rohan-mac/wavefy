@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../Player.css";
 
 const Player = ({ track }) => {
@@ -8,8 +8,7 @@ const Player = ({ track }) => {
   const [volume, setVolume] = useState(0.7);
 
 
-  // console.log(track);
-  
+
   const togglePlay = () => {
     if (!track) return;
 
@@ -38,6 +37,16 @@ const Player = ({ track }) => {
     audioRef.current.volume = e.target.value;
   };
 
+  useEffect(() => {
+    if (track && audioRef.current) {
+      audioRef.current.pause();       // stop previous song
+      audioRef.current.load();        // load new song
+      audioRef.current.play();        // auto play
+      setIsPlaying(true);
+    }
+  }, [track]);
+
+
   return (
     <div className="player">
       <audio
@@ -60,7 +69,7 @@ const Player = ({ track }) => {
 
       {/* Controls */}
       <div className="player-controls">
-        <div onClick={togglePlay} className="play-pause-button">
+        <div className="play-pause-button">
 
           <button>⏮</button>
           <button className="play" onClick={togglePlay}>

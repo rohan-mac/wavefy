@@ -5,6 +5,7 @@ import { loginUser, SignupUser } from "../api";
 import logo from "../assets/image.png";
 function LoginSignup() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ function LoginSignup() {
     e.preventDefault();
     setError("");
 
+    setLoading(true)
     try {
       let response;
 
@@ -44,12 +46,14 @@ function LoginSignup() {
     } catch (err) {
       setError(err.message || "Something went wrong");
     }
+    finally {
+      setLoading(false)
+    }
   };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
-        {/* <h1 className="logo">Wavefy</h1> */}
 
         <h2>{isLogin ? "Login" : "Create Account"}</h2>
 
@@ -102,7 +106,17 @@ function LoginSignup() {
           )}
 
           <button type="submit">
-            {isLogin ? "Login" : "Sign Up"}
+
+            {loading ? (
+              <div className="loading">
+                <span class="loginloader"></span>
+              </div>
+            ) : (
+              <>
+                {isLogin ? "Login" : "Sign Up"}
+
+              </>
+            )}
           </button>
         </form>
 

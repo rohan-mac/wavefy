@@ -1,75 +1,3 @@
-// import React, { useEffect } from "react";
-// import Signup from "../pages/Signup";
-// import { useRef } from "react";
-// import { useState } from "react";
-// import { NavLink } from "react-router-dom";
-// import { logoutUser } from "../api";
-
-// function User({ user }) {
-//   const username = user.name[0].toUpperCase() + user.name.slice(1);
-
-//   const [open, setOpen] = useState(false);
-//   const boxRef = useRef(null);
-
-//   function handleClick() {
-//     setOpen(!open);
-//   }
-
-//   useEffect(() => {
-//     async function handleLogout() {
-//       const result = await logoutUser();
-//       // Implement logout functionality here
-//       window.location.reload();
-//     }
-//   }, []);
-
-
-
-
-//   return (
-//     <div className="user-profile" >
-//       <img
-
-//         src={user.profileImage}
-//         alt="User"
-//         className="user-avatar"
-//         onClick={handleClick}
-//       />
-//       <div className="user-info">
-//         <span className="user-name">{username}</span>
-//         {/* <span className="user-role">{user.role }</span> */}
-//       </div>
-
-//       {open && (
-//         <div className="user-box" ref={boxRef}>
-//           {/* <form action="submit"> */}
-
-//           <div>
-
-//             <nav className="sidebar-menu">
-//               <NavLink
-//                 to="/settings"
-//                 end
-//                 className={({ isActive }) =>
-//                   `menu-item ${isActive ? "active" : ""}`
-//                 }
-//               >
-//                 Setting
-//               </NavLink>
-//             </nav>
-
-//             <span onClick={handleLogout}>LogOut</span>
-//           </div>
-//           {/* </form> */}
-//         </div >
-//       )
-//       }
-//     </div >
-//   );
-// }
-
-// export default User;
-
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { logoutUser } from "../api";
@@ -83,7 +11,7 @@ function User({ user }) {
   const boxRef = useRef(null);
 
   function handleClick() {
-    setOpen(!open);
+    setOpen((prevOpen) => !prevOpen);
   }
 
   useEffect(() => {
@@ -113,7 +41,7 @@ function User({ user }) {
   }
 
   return (
-    <div className="user-profile">
+    <div className="user-profile"ref={boxRef}>
       <img
         src={user.profileImage}
         alt="User"
@@ -126,14 +54,12 @@ function User({ user }) {
       </div>
 
       {open && (
-        <div className="user-box" ref={boxRef} >
+        <div className="user-box"  >
           <nav className="sidebar-menu">
             <NavLink
               to="/settings"
               end
-              // className={({ isActive }) =>
-              //   `menu-item ${isActive ? "active" : ""}`
-              // }
+
               className="menu-item"
             >
               <svg
@@ -151,7 +77,7 @@ function User({ user }) {
               </svg>
               <span>
 
-              Setting
+                Setting
               </span>
             </NavLink>
           </nav>

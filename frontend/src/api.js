@@ -246,6 +246,8 @@ export async function getAllArtist() {
     }
 
     const data = await response.json();
+    console.log(data, "artists data");
+    
     return data;
   } catch (error) {
     console.error("Error fetching artists:", error);

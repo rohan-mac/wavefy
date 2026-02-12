@@ -25,15 +25,15 @@ select {
 
 
 /* ===== Song Filter Wrapper ===== */
-.song-filter {
+/* .song-filter {
   width: 100%;
   max-width: 260px;
   margin: 10px 0;
   position: relative;
-}
+} */
 
 /* ===== Select Styling ===== */
-.song-filter select {
+/* .song-filter select {
   width: 100%;
   padding: 10px 38px 10px 14px;
   font-size: 14px;
@@ -50,19 +50,19 @@ select {
   -moz-appearance: none;
 
   transition: all 0.25s ease;
-}
+} */
 
 /* ===== Hover / Focus ===== */
-.song-filter select:hover {
+/* .song-filter select:hover {
   border-color: #1db954; /* Spotify-like green */
-}
+/* } */ 
 
-.song-filter select:focus {
+/* .song-filter select:focus {
   border-color: #1db954;
   box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
-}
+} */
 
-/* ===== Custom Dropdown Arrow ===== */
+/* ===== Custom Dropdown Arrow =====
 .song-filter::after {
   content: "▾";
   position: absolute;
@@ -72,18 +72,75 @@ select {
   font-size: 14px;
   color: #aaa;
   pointer-events: none;
-}
+} */
 
 /* ===== Options ===== */
-.song-filter option {
+/* .song-filter option {
   background-color: #121212;
   color: #ffffff;
 }
 
 /* ===== Disabled Placeholder ===== */
-.song-filter option[value=""] {
-  color: #888;
+/* .song-filter option[value=""] {
+  color: #888; */
+/* } */ 
+
+/* ===== Song Filter Wrapper ===== */
+.song-filter {
+  display: flex;
+  align-items: center;
+
+  padding: 10px 14px;
+  margin-bottom: 16px;
+
+  background: #121212;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
+
+/* ===== Select Artist ===== */
+.song-filter select {
+  width: 220px;
+  padding: 10px 36px 10px 14px;
+
+  background: #1e1e1e;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  outline: none;
+  cursor: pointer;
+
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b3b3b3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+/* ===== Hover & Focus ===== */
+.song-filter select:hover {
+  border-color: #1db954;
+}
+
+.song-filter select:focus {
+  border-color: #1db954;
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
+}
+
+/* ===== Disabled / Placeholder Option ===== */
+.song-filter option[value=""] {
+  color: #999;
+}
+
 
 /* ===== Mobile (<= 480px) ===== */
 @media (max-width: 480px) {

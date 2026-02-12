@@ -8,6 +8,8 @@ const ArtistSelect = ({ onArtistChange }) => {
   useEffect(() => {
     async function fetchArtists() {
       const data = await getAllArtist();
+      console.log(data,"aaaaaaaaaaaaaaa");
+      
       setArtists(data || []);
     }
     fetchArtists();

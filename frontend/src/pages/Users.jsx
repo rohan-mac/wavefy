@@ -1,63 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { fetchUserProfile, updateUserProfile } from "../api";
-// import "../Users.css";
-// import Loader from "../Components/Loader";
-
-// const Users = () => {
-//   const [userData, setUserData] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const getProfile = async () => {
-//       const data = await fetchUserProfile();
-
-//       if (data?.error) {
-//         console.error("Error fetching user profile:", data.error);
-//       } else {
-//         setUserData(data);
-//       }
-
-//       setLoading(false);
-//     };
-
-//     getProfile();
-
-//     // Implementation for updating user role
-//   }, []);
-
-//   if (loading) return <Loader />;
-//   if (!userData || userData.length === 0) return <h2>No users found</h2>;
-
-//   return (
-//     <div className="users-container">
-//       {/* <h2>User Profiles</h2> */}
-//       <ul className="user-list">
-//         {userData.map((user) => (
-//           <li key={user._id} className="user-card">
-//             <div className="userProfile">
-//               <img
-//                 src={user.profileImage || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
-//                 alt={`${user.name} profile`}
-//                 className="profile-img"
-//               />
-//             </div>
-//             <div className="user-info">
-//               <p><strong>Name:</strong> {user.name}</p>
-//               <p><strong>Email:</strong> {user.email}</p>
-//               <p><strong>Role:</strong> {user.role}</p>
-//             </div>
-//             <div className="change-role-btn">
-//               <button onClick={() => updateRole(user._id, "admin")}>Change Role</button>
-//             </div>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Users;
-
 import React, { useEffect, useState } from "react";
 import { deleteUserAccount, fetchUserProfile, updateUserRoleByAdmin } from "../api";
 import "../Users.css";
@@ -67,6 +7,29 @@ const Users = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState(null);
+
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [dateSort, setDateSort] = useState("newest");
+
+
+
+  const filterByRole = (users) => {
+    if (roleFilter === "all") return users;
+    return users.filter(user => user.role === roleFilter);
+  };
+
+
+
+  const sortByDate = (users) => {
+    return [...users].sort((a, b) => {
+      if (dateSort === "newest") {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    });
+  };
+
+
 
   useEffect(() => {
     const getProfile = async () => {
@@ -102,13 +65,46 @@ const Users = () => {
     await deleteUserAccount(userId);
   }
 
+
+
+  const getProcessedUsers = () => {
+    const filtered = filterByRole(userData);
+    return sortByDate(filtered);
+  };
+
+
+
+
+
   if (loading) return <Loader />;
   if (!userData.length) return <h2>No users found</h2>;
 
   return (
     <div className="users-container">
+
+      <div className="users-filters">
+        {/* Role Filter */}
+        <select
+          value={roleFilter}
+          onChange={(e) => setRoleFilter(e.target.value)}
+        >
+          <option value="all">All Roles</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+
+        {/* Date Sort */}
+        <select
+          value={dateSort}
+          onChange={(e) => setDateSort(e.target.value)}
+        >
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+
       <ul className="user-list">
-        {userData.map((user) => (
+        {getProcessedUsers().map((user) => (
           <li key={user._id} className="user-card">
             <div className="userProfile">
               <img

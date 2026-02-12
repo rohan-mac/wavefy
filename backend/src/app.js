@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import songRoutes from "./routes/songRoutes.js";
 import userRouter from "./routes/userRouter.js";
-// import artistRoutes from "./routes/artistRoutes.js";
+import otpRoutes from "./routes/otpRoutes.js";
 import artistRoutes from "./routes/artistRoutes.js";
 const app = express();
 
@@ -34,7 +34,9 @@ app.use(
 app.use(express.json());
 
 
-app.use("/api/songs", songRoutes);
+app.use("/api/songs", songRoutes); // ✅ connect song routes
 app.use("/api/users", userRouter);   // ✅ connect router
 app.use("/api/artists", artistRoutes); // ✅ connect artist routes
+app.use("/api/otp", otpRoutes); // ✅ connect OTP routes
+
 export default app;

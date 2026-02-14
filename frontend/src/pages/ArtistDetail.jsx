@@ -1,5 +1,5 @@
 import { useParams, useLocation } from "react-router-dom";
-import "../ArtistDetail.css";
+import "../style/ArtistDetail.css";
 import { useEffect, useState } from "react";
 import { getAllTracks } from "../api";
 const ArtistDetail = ({ setCurrentTrack }) => {

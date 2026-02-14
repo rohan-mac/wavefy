@@ -1,15 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { logoutUser } from "../api";
+import { useNavigate } from "react-router-dom";
 
 function User({ user }) {
-  console.log(user);
+  // console.log(user);
 
-  const username = user.name[0].toUpperCase() + user.name.slice(1);
+  const username =
+    user?.name
+      ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
+      : "User";
 
   const [open, setOpen] = useState(false);
   const boxRef = useRef(null);
-
+  const navigate = useNavigate();
   function handleClick() {
     setOpen((prevOpen) => !prevOpen);
   }
@@ -34,19 +38,25 @@ function User({ user }) {
   async function handleLogout() {
     try {
       await logoutUser();
-      window.location.reload();
+      localStorage.removeItem("wavefytoken");
+      window.location.reload(); // let App re-check auth
     } catch (err) {
       console.error("Logout failed", err);
     }
   }
 
+
+
   return (
-    <div className="user-profile"ref={boxRef}>
+    <div className="user-profile" ref={boxRef}
+      onClick={handleClick}
+
+    >
       <img
         src={user.profileImage}
         alt="User"
         className="user-avatar"
-        onClick={handleClick}
+      // onClick={handleClick}
       />
 
       <div className="user-info">

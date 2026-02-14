@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAllTracks } from "../api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import Player from "../Components/Player";
+// import Player from "../Components/Player";
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 
-import "../Home.css";
+import "../style/Home.css";
 import SongSkeleton from "../Components/SongSkeleton";
 
 const Home = ({ setCurrentTrack }) => {

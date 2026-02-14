@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
-import "../Sidebar.css";
+import "../style/Sidebar.css";
 import image from "../assets/image.png";
+import { useNavigate } from "react-router-dom";
 const Sidebar = ({ isadmin }) => {
+  const navigate = useNavigate();
   return (
     <aside className="sidebar">
       {/* Logo */}
-      <div className="sidebar-logo">
+      <div className="sidebar-logo" onClick={() => navigate("/")}>
         <div className="brand-logo">
           <img src={image} alt="Logo" className="logo-image" />
 
@@ -37,9 +39,9 @@ const Sidebar = ({ isadmin }) => {
           <span>Albums</span>
         </NavLink>
 
-        <NavLink to="/playlists" className={({ isActive }) => `menu-item ${isActive ? "active" : ""}`}>
+        <NavLink to="/library" className={({ isActive }) => `menu-item ${isActive ? "active" : ""}`}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" x2="21" y1="6" y2="6"></line><line x1="8" x2="21" y1="12" y2="12"></line><line x1="8" x2="21" y1="18" y2="18"></line><line x1="3" x2="3.01" y1="6" y2="6"></line><line x1="3" x2="3.01" y1="12" y2="12"></line><line x1="3" x2="3.01" y1="18" y2="18"></line></svg>
-          <span>Playlists</span>
+          <span>Library</span>
         </NavLink>
         <hr></hr>
         {isadmin && (

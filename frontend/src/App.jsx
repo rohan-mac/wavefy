@@ -1,12 +1,12 @@
 import Header from "./Components/Header";
 import Sidebar from "./Components/SideBar";
 import Home from "./pages/Home";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+// import "./App.css";
+import "./style/App.css";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Albums from "./pages/Albums";
 import Artists from "./pages/Artists";
 import ArtistDetail from "./pages/ArtistDetail";
-import PlayList from "./pages/PlayList";
 import Player from "./Components/Player";
 import AlbumsFeature from "./pages/AlbumsFeature";
 import { useState, useEffect } from "react";
@@ -16,19 +16,23 @@ import Users from "./pages/Users";
 import Songs from "./pages/Songs";
 import AddArtist from "./pages/AddArtist";
 import Settings from "./pages/Setting";
-
+import Loader from "./Components/Loader";
+import Library from "./pages/Library";
 
 const App = () => {
-
   const [currentTrack, setCurrentTrack] = useState(null);
   const [user, setUser] = useState(null);
-  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
-  const [isadmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("wavefytoken");
+
     if (!token) {
-      setUserIsLoggedIn(false);
+      navigate("/login");
+      setLoading(false);
       return;
     }
 
@@ -38,111 +42,79 @@ const App = () => {
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Not authorized");
+        if (!res.ok) throw new Error("Unauthorized");
         return res.json();
       })
       .then((data) => {
         setUser(data);
-        setUserIsLoggedIn(true);
         if (data.role === "admin") {
-          setIsAdmin(true)
+          setIsAdmin(true);
         }
-
-
       })
-
       .catch(() => {
         localStorage.removeItem("wavefytoken");
         setUser(null);
-        setUserIsLoggedIn(false);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
+  // 🔄 Show loader while checking auth
+  if (loading) {
+    return <div className="loading-screen">
+      <Loader />
+    </div>;
+  }
 
+  // ❌ Not logged in → Show login page
+  if (!user) {
+    return <LoginSignup />;
+  }
 
-
+  // ✅ Logged in → Show full app
   return (
-    <>
-      {userIsLoggedIn ? (
-        <div className="app flex">
-          {/* Sidebar */}
-          <div className="sidebar-container">
-            <Sidebar isadmin={isadmin} />
-          </div>
+    <div className="app flex">
+      {/* Sidebar */}
+      <div className="sidebar-container">
+        <Sidebar isadmin={isAdmin} />
+      </div>
 
-          {/* Main Content */}
-          <div className="main-container">
-            <>
-              <Header user={user} />
-              <Routes>
-                <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
-                <Route path="/artists" element={<Artists />} />
-                <Route path="/albums" element={<Albums />} />
-                <Route path="/playlists" element={<PlayList />} />
-                <Route
-                  path="/artist/:id"
-                  element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
-                />
-                <Route path="/settings" element={<Settings user={user} />} />
-                <Route
-                  path="/albums/:id"
-                  element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
-                />
-                <Route path="/addsong" element={<AddSong />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/songs" element={<Songs setCurrentTrack={setCurrentTrack} />} />
-                <Route path="/addartist" element={<AddArtist />} />
-              </Routes>
-              {/* {
-                currentTrack && <Player track={currentTrack} />
-              } */}
-              <div className={`player-wrapper ${currentTrack ? "show" : ""}`}>
-                {currentTrack && <Player track={currentTrack} />}
-              </div>
+      {/* Main Content */}
+      <div className="main-container">
+        <Header user={user} />
 
-            </>
-          </div>
+        <Routes>
+          <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
+          <Route path="/artists" element={<Artists />} />
+          <Route path="/albums" element={<Albums />} />
+          <Route path="/library" element={<Library user={user} />} />
+          <Route
+            path="/artist/:id"
+            element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
+          />
+          <Route path="/settings" element={<Settings user={user} />} />
+          <Route
+            path="/albums/:id"
+            element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />}
+          />
+          <Route path="/addsong" element={<AddSong />} />
+          <Route path="/users" element={<Users />} />
+          <Route
+            path="/songs"
+            element={<Songs setCurrentTrack={setCurrentTrack} />}
+          />
+          <Route path="/addartist" element={<AddArtist />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
 
-          {/* Player always visible when logged in */}
+        {/* Player */}
+        <div className={`player-wrapper ${currentTrack ? "show" : ""}`}>
+          {currentTrack && <Player track={currentTrack} />}
         </div>
-      ) : (
-        // <LoginSignup />
-
-        <LoginSignup onLoginSuccess={() => {
-          window.location.reload(); // simplest & reliable
-        }} />
-
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-// export default isadmin
 export default App;
-
-
-{/* // <div className="app bg-red-500 flex">
-      //   {/* Sidebar Container */}
-//   <div className="sidebar-container">
-//     <Sidebar />
-//   </div>
-
-//   {/* Main Content Container */}
-//   <div className="main-container">
-//     <Header />
-//     {/* <Home /> */}
-
-//     <Routes>
-//       <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
-//       <Route path="/artists" element={<Artists />} />
-//       <Route path="/albums" element={<Albums />} />
-//       <Route path="/playlists" element={<PlayList />} />
-//       <Route path="/artist/:id" element={<ArtistDetail setCurrentTrack={setCurrentTrack} />} />
-//       <Route path="/albums/:id" element={<AlbumsFeature setCurrentTrack={setCurrentTrack} />} />
-
-//       {/* <Route path="/liked" element={<LikedSongs />} /> */}
-//     </Routes>
-//     {/* <Player track={currentTrack} /> */}
-//   </div>
-
-// </div> */}

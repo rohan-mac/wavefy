@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../AddArtist.css";
+import "../style/AddArtist.css";
 
 const AddArtist = () => {
     const [name, setName] = useState("");

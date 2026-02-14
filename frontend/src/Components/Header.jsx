@@ -1,10 +1,10 @@
 import React from "react";
 import User from "./Header.User";
-import "../Header.css";
+import "../style/Header.css";
 import Nevigation from "./Nevigation";
 
 const Header = ({ user }) => {
-  console.log(user);
+  // console.log(user);
   
   return (
     <>

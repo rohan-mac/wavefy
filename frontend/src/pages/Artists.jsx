@@ -3,7 +3,7 @@ import {
   getArtists,
   // getAllArtist
 } from "../api";
-import "../Artists.css";
+import "../style/Artists.css";
 import Loader from "../Components/Loader";
 import { useNavigate } from "react-router-dom";
 

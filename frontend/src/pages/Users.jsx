@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { deleteUserAccount, fetchUserProfile, updateUserRoleByAdmin } from "../api";
-import "../Users.css";
+import "../style/Users.css";
 import Loader from "../Components/Loader";
 
 const Users = () => {

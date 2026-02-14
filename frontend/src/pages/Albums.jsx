@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAlbums } from "../api";
-import "../Albums.css"
+import "../style/Albums.css"
 import { useNavigate } from "react-router-dom";
 import Loader from "../Components/Loader";
 

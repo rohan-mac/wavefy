@@ -116,7 +116,7 @@
 // export default AddSong;
 
 import React, { useState } from "react";
-import "../AddSong.css";
+import "../style/AddSong.css";
 
 const AddSong = () => {
   const [title, setTitle] = useState("");

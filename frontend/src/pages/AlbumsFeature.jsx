@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import "../ArtistDetail.css";
+import "../style/ArtistDetail.css";
 import { useState } from "react";
 
 const AlbumsFeature = ({ setCurrentTrack }) => {

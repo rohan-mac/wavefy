@@ -9,7 +9,7 @@
 }
 
 .artist-detail {
-  /* background-color: var(--bg-dark); */
+  background-color: var(--bg-dark);
   color: var(--text-main);
   min-height: 100vh;
   font-family: 'Segoe UI', Roboto, sans-serif;

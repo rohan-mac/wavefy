@@ -1,7 +1,6 @@
 import Header from "./Components/Header";
 import Sidebar from "./Components/SideBar";
 import Home from "./pages/Home";
-// import "./App.css";
 import "./style/App.css";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Albums from "./pages/Albums";
@@ -18,6 +17,8 @@ import AddArtist from "./pages/AddArtist";
 import Settings from "./pages/Setting";
 import Loader from "./Components/Loader";
 import Library from "./pages/Library";
+import Favorites from "./pages/Favoriet";
+import PlayerPage from "./pages/PlayerPage";
 
 const App = () => {
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -85,10 +86,23 @@ const App = () => {
         <Header user={user} />
 
         <Routes>
-          <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} />} />
+          <Route path="/" element={<Home setCurrentTrack={setCurrentTrack} user={user} />} />
           <Route path="/artists" element={<Artists />} />
           <Route path="/albums" element={<Albums />} />
           <Route path="/library" element={<Library user={user} />} />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites setCurrentTrack={setCurrentTrack} />
+            }
+          />
+          <Route
+            path="/player"
+            element={
+              <PlayerPage track={currentTrack} />
+            }
+          />
+
           <Route
             path="/artist/:id"
             element={<ArtistDetail setCurrentTrack={setCurrentTrack} />}
@@ -100,6 +114,7 @@ const App = () => {
           />
           <Route path="/addsong" element={<AddSong />} />
           <Route path="/users" element={<Users />} />
+
           <Route
             path="/songs"
             element={<Songs setCurrentTrack={setCurrentTrack} />}

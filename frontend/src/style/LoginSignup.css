@@ -1,255 +1,280 @@
-/* Full page background */
-.auth-container {
+/* ================= Background ================= */
+
+.page-wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #1db954, #000);
+  background: radial-gradient(circle at top, #1db954 0%, #0b0b0b 60%);
   font-family: "Poppins", sans-serif;
+  padding: 20px;
 }
 
-/* Card */
-.auth-card {
-  width: 350px;
-  background: #0f0f0f;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+/* ================= Card ================= */
+
+.form-card {
+  width: 480px;
+  background: #111;
+  padding: 36px 32px;
+  border-radius: 20px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   animation: fadeUp 0.6s ease;
 }
 
-/* Logo */
-.logo {
+/* ================= Logo ================= */
+
+.brand-logo {
   text-align: center;
   color: #1db954;
-  margin-bottom: 25px;
   font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 26px;
   letter-spacing: 1px;
+  text-shadow: 0 0 18px rgba(29, 185, 84, 0.4);
 }
 
-/* Form */
-.auth-form {
+/* ================= Error ================= */
+
+.form-error {
+  background: rgba(255, 92, 92, 0.08);
+  border: 1px solid rgba(255, 92, 92, 0.2);
+  padding: 10px;
+  border-radius: 12px;
+  color: #ff5c5c;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ================= Form ================= */
+
+.form-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
-/* Inputs */
-.auth-form input {
+.form-body input {
   padding: 14px;
   background: #181818;
   border: 1px solid #2a2a2a;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #fff;
   font-size: 14px;
   outline: none;
-  transition: 0.3s;
+  transition: all 0.25s ease;
 }
 
-.auth-form input::placeholder {
-  color: #777;
+.form-body input::placeholder {
+  color: #666;
 }
 
-.auth-form input:focus {
+.form-body input:focus {
   border-color: #1db954;
-  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.18);
 }
 
-/* Button */
-.auth-form button {
-  margin-top: 10px;
+/* ================= Primary Button ================= */
+
+.primary-btn {
+  margin-top: 8px;
   padding: 14px;
   background: linear-gradient(135deg, #1db954, #1ed760);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   color: #000;
   font-weight: 700;
   font-size: 15px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.25s ease;
 }
 
-.auth-form button:hover {
+.primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(29, 185, 84, 0.4);
+  box-shadow: 0 12px 30px rgba(29, 185, 84, 0.35);
 }
 
-.auth-form button:active {
-  transform: scale(0.98);
+.primary-btn:active {
+  transform: scale(0.97);
 }
 
-/* Footer */
-.auth-footer {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 13px;
-  color: #aaa;
+/* ================= Avatar Upload ================= */
+
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.auth-footer span {
-  color: #1db954;
+.avatar-box {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 2px dashed #2a2a2a;
+  overflow: hidden;
   cursor: pointer;
-  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.auth-footer span:hover {
+.avatar-box:hover {
+  transform: scale(1.05);
+  border-color: #1db954;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.avatar-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 13px;
+  color: #666;
+}
+
+.avatar-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px;
+}
+
+.avatar-remove {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.avatar-remove:hover {
   text-decoration: underline;
 }
 
-/* Animation */
+/* ================= OTP Row ================= */
+
+/* .otp-row {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    justify-content: center;
+    flex-direction: row;
+} */
+ .otp-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;   /* important */
+}
+
+
+.otp-row input {
+    /* flex: 1; */
+    margin: 0;
+    width: 100%;
+    height: 41px;
+}
+/* 
+.otp-row input {
+  flex: 1;
+} */
+
+.otp-button {
+    height: 43px;
+    /* padding: 0 20px; */
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    background: #202020;
+    color: #1db954;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    width: 30%;
+}
+.otp-button:hover {
+  background: #1db954;
+  color: #000;
+}
+
+/* ================= Footer ================= */
+
+.form-footer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+}
+
+.form-footer span {
+  color: #1db954;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.form-footer span:hover {
+  text-decoration: underline;
+}
+
+/* ================= Loader ================= */
+
+.btn-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #0d0d0d;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 0.8s linear infinite;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= Animation ================= */
+
 @keyframes fadeUp {
   from {
     opacity: 0;
     transform: translateY(25px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@media (max-width: 1024px) {
-  .auth-card {
-    width: 90%;
-    max-width: 380px;
+/* ================= Responsive ================= */
+
+@media (max-width: 480px) {
+  .form-card {
+    width: 100%;
     padding: 28px;
   }
-}
-
-@media (max-width: 600px) {
-  .auth-container {
-    padding: 20px;
-  }
-
-  .auth-card {
-    width: 100%;
-    padding: 24px;
-    border-radius: 14px;
-  }
-
-  .logo {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-  .auth-form input {
-    padding: 12px;
-    font-size: 13px;
-  }
-
-  .auth-form button {
-    padding: 12px;
-    font-size: 14px;
-  }
-
-  .auth-footer {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 400px) {
-  .auth-card {
-    padding: 20px;
-  }
-
-  .logo {
-    font-size: 20px;
-  }
-}
-
-
-.loading {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.loginloader {
-  width: 24px;
-  height: 24px;
-  border: 3px solid #090909;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-.upload-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.upload-box {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #f3f3f3;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  transition: 0.3s ease;
-  border: 2px dashed #ccc;
-}
-
-.upload-box:hover {
-  transform: scale(1.05);
-  border-color: #6c63ff;
-}
-
-.upload-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.upload-placeholder {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: #777;
-  font-size: 14px;
-}
-
-.upload-placeholder span {
-  font-size: 28px;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  padding: 5px;
-}
-
-.remove-btn {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: red;
-  font-size: 12px;
-  cursor: pointer;
 }

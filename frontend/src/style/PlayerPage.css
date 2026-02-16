@@ -1,0 +1,45 @@
+.player-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1e1e1e, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.player-container {
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.player-cover img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  margin-bottom: 30px;
+}
+
+.player-info h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.player-info p {
+  color: #bbb;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.player-controls {
+  margin-top: 20px;
+}
+
+.player-page.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: #000;
+  height: 100vh;
+}

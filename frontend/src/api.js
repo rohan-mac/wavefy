@@ -97,7 +97,6 @@ export async function fetchUserProfile() {
   }
 };
 
-
 export async function deleteUserAccount(id) {
   try {
     const token = localStorage.getItem("wavefytoken");
@@ -247,10 +246,60 @@ export async function getAllArtist() {
 
     const data = await response.json();
     console.log(data, "artists data");
-    
+
     return data;
   } catch (error) {
     console.error("Error fetching artists:", error);
     return null; // or []
+  }
+}
+
+export async function sendOtp(email) {
+  console.log("dfghjl;'");
+
+  try {
+    // const response = await fetch(`${BASE_URL}/otp/send-otp`, {
+    const response = await fetch(`http://localhost:5000/api/otp/send-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to send OTP");
+    }
+
+    const data = await response.json();
+    console.log(data, "sendotp response");
+    return data;
+
+  } catch (error) {
+    console.log("error in api sendotp", error);
+
+  }
+}
+
+export async function verifyOtp(email, otp) {
+  console.log("verifying otp in api", email, otp);
+  try {
+    const response = await fetch(`http://localhost:5000/api/otp/verify-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, otp }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to verify OTP");
+    }
+    const data = await response.json();
+    console.log(data, "verifyotp response");
+    return data;
+  }
+  catch (error) {
+    console.log("error in api verifyotp", error);
   }
 }

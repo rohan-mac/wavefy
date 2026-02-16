@@ -111,7 +111,7 @@ form button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 form button:hover {
@@ -185,10 +185,11 @@ form button:hover {
     }
 
     /* Larger touch targets for mobile inputs */
-    form input[type="text"],
+    /* form input[type="text"],
     form input[type="email"],
     form input[type="password"],
-    form select {
+    form select { */
+    form input{
         padding: 12px;
         font-size: 14px;
         /* Adjust to 16px if you want to avoid auto-zoom on iPhone */

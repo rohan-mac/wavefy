@@ -35,6 +35,7 @@ console.log(process.env.EMAIL_USER);
 
         res.json({ success: true, message: "OTP sent successfully" });
     } catch (error) {
+       console.log("Error sending OTP:", error);
         res.status(500).json({ success: false, message: "OTP not sent" });
     }
 };
@@ -42,7 +43,7 @@ console.log(process.env.EMAIL_USER);
 // ✅ Verify OTP
 export const verifyOtp = (req, res) => {
     const { email, otp } = req.body;
-
+console.log("verifying otp", email, otp);
     if (otpStore[email] && otpStore[email] == otp) {
         delete otpStore[email];
         return res.json({ success: true, message: "OTP verified" });

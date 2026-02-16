@@ -114,6 +114,8 @@ const Users = () => {
                 }
                 alt={user.name}
                 className="profile-img"
+                width="100%"
+                height="100%"
               />
               <div className="user-info">
                 <p><strong>Name:</strong> {user.name}</p>

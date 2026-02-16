@@ -4,47 +4,64 @@
   color: #fff;
 }
 
+/* ================= USER GRID ================= */
 .user-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+/* ================= USER CARD ================= */
 .user-card {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
   background: #1e293b;
-  border-radius: 12px;
+  border-radius: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
-  text-align: start;
-  justify-content: space-between;
 }
-
 
 .user-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
 }
 
+/* ================= PROFILE IMAGE ================= */
 .profile-img {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ================= USER INFO ================= */
+.user-info {
+  flex: 1;
+  min-width: 0;
+  text-align: start;
 }
 
 .user-info p {
-  margin: 2px 0;
+  margin: 4px 0;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
+/* ================= BUTTON SECTION ================= */
+.change-role-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Admin Button */
 .admin-btn {
   padding: 8px 18px;
   background: #0f172a;
@@ -69,8 +86,7 @@
   cursor: not-allowed;
 }
 
-
-
+/* Delete Button */
 .delete-btn {
   padding: 8px 14px;
   background: transparent;
@@ -88,50 +104,39 @@
   color: #fff;
 }
 
-.change-role-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-
-/* ===== Filters Header ===== */
+/* ================= FILTER SECTION ================= */
 .users-filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  flex-wrap: wrap;
 
   padding: 14px 18px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 
   background: #121212;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border-radius: 14px;
 
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
-/* ===== Select Inputs ===== */
 .users-filters select {
-  min-width: 180px;
+  flex: 1;
+  min-width: 160px;
   padding: 10px 14px;
-
   background: #1e1e1e;
-  color: #ffffff;
-
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .15);
   border-radius: 8px;
-
   font-size: 14px;
   font-weight: 500;
-
   outline: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all .2s ease;
 }
 
-/* Hover & Focus */
 .users-filters select:hover {
   border-color: #1db954;
 }
@@ -141,32 +146,58 @@
   box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.25);
 }
 
-/* ===== Optional label style (future ready) ===== */
 .users-filters label {
   font-size: 13px;
   color: #b3b3b3;
   margin-right: 6px;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+  .profile-img {
+    width: 70px;
+    height: 70px;
+  }
+
   .user-card {
+    padding: 14px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+
+  .user-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .profile-img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .change-role-btn {
+    width: 100%;
     flex-direction: row;
-    align-items: center;
-    text-align: starts;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 12px;
   }
 
-  .user-info {
-    display: block;
+  .admin-btn,
+  .delete-btn {
+    flex: 1;
+    text-align: center;
   }
 
-  .userProfile {
-    display: flex;
-    gap: 18px;
-    max-width: 60%;
+  .users-filters {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .user-info p {
-    font-size: 13px;
+  .users-filters select {
+    width: 100%;
   }
 }

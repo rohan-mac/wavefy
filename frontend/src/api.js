@@ -258,8 +258,8 @@ export async function sendOtp(email) {
   console.log("dfghjl;'");
 
   try {
-    // const response = await fetch(`${BASE_URL}/otp/send-otp`, {
-    const response = await fetch(`http://localhost:5000/api/otp/send-otp`, {
+    const response = await fetch(`${BASE_URL}/otp/send-otp`, {
+    // const response = await fetch(`otp/send-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -284,7 +284,7 @@ export async function sendOtp(email) {
 export async function verifyOtp(email, otp) {
   console.log("verifying otp in api", email, otp);
   try {
-    const response = await fetch(`http://localhost:5000/api/otp/verify-otp`, {
+    const response = await fetch(`${BASE_URL}2+0/otp/verify-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

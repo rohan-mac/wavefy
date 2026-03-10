@@ -15,10 +15,10 @@ export const sendOtp = async (req, res) => {
     }
 
     const otp = generateOTP();
-    console.log(otp);
+    // console.log(otp);
 
     otpStore[email] = otp;
-console.log(process.env.EMAIL_USER);
+// console.log(process.env.EMAIL_USER);
 
     try {
         await transporter.sendMail({

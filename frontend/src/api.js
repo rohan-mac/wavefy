@@ -255,17 +255,19 @@ export async function getAllArtist() {
 }
 
 export async function sendOtp(email) {
-  console.log("dfghjl;'");
+  console.log(email, "sending otp in api");
 
   try {
-    const response = await fetch(`${BASE_URL}/otp/send-otp`, {
-    // const response = await fetch(`otp/send-otp`, {
+    const response = await fetch(`${BASE_URL}/otp/sendotp`, {
+      // const response = await fetch(`http://localhost:5000/api/otp/sendotp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email }),
     });
+    console.log(response);
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to send OTP");
@@ -277,14 +279,14 @@ export async function sendOtp(email) {
 
   } catch (error) {
     console.log("error in api sendotp", error);
-
+    throw error;
   }
 }
 
 export async function verifyOtp(email, otp) {
   console.log("verifying otp in api", email, otp);
   try {
-    const response = await fetch(`${BASE_URL}2+0/otp/verify-otp`, {
+    const response = await fetch(`${BASE_URL}/otp/verifyotp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

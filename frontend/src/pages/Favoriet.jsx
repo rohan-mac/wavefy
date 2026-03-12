@@ -1,97 +1,75 @@
-import React, { use, useEffect, useState } from "react";
-import "../style/Testing.css";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
+import FavouriteSongsPage from "../Components/FavouriteSongsPage";
 import { getAllTracks } from "../api";
+import { sampleSongs } from "../data/sampleSongs";
+import "../style/FavouriteSongsPage.css";
+
 const Favorites = ({ setCurrentTrack }) => {
-    const [favorites, setFavorites] = useState([]);
+  const { state } = useLocation();
+  const [songs, setSongs] = useState(sampleSongs);
 
-    // const { id } = useParams();
-    const { state } = useLocation();
-    //   useEffect(() => {
-    //     const storedFav =
-    //       JSON.parse(localStorage.getItem("favorites")) || [];
-    //     setFavorites(storedFav);
-    //   }, []);
+  const favouriteSongIds = useMemo(() => state?.songs || [], [state?.songs]);
 
-    //   const removeFavorite = (id) => {
-    //     const updated = favorites.filter(
-    //       (track) => track._id !== id
-    //     );
-    //     setFavorites(updated);
-    //     localStorage.setItem(
-    //       "favorites",
-    //       JSON.stringify(updated)
-    //     );
-    //   };
+  useEffect(() => {
+    const fetchFavoriteTracks = async () => {
+      if (!favouriteSongIds.length) {
+        setSongs(sampleSongs);
+        return;
+      }
 
-    useEffect(() => {
-        async function fetchFavoriteTracks() {
-            try {
-                const allTracks = await getAllTracks();
-                if (!allTracks || !state?.songs) return;
+      try {
+        const allTracks = await getAllTracks();
+        const favTracks = allTracks.data
+          .filter((track) => favouriteSongIds.includes(track._id))
+          .map((track) => ({
+            id: track._id,
+            title: track.title,
+            artist: track.artists?.[0] || "Unknown Artist",
+            coverImage: track.imageUrl,
+            track,
+          }));
 
-                const favTracks = allTracks.data.filter(track =>
-                    state.songs.includes(track._id)
-                );
+        setSongs(favTracks.length ? favTracks : sampleSongs);
+      } catch (error) {
+        console.error("Failed to fetch favorite tracks", error);
+        setSongs(sampleSongs);
+      }
+    };
 
-                setFavorites(favTracks);
-            } catch (error) {
-                console.error("Failed to fetch favorite tracks", error);
-            }
-        }
+    fetchFavoriteTracks();
+  }, [favouriteSongIds]);
 
-        fetchFavoriteTracks();
-    }, [state?.songs]);
+  const handleDeleteSong = (songId) => {
+    setSongs((prevSongs) => prevSongs.filter((song) => song.id !== songId));
+  };
 
+  const handlePlaySong = (song) => {
+    setCurrentTrack(song.track || {
+      _id: song.id,
+      title: song.title,
+      imageUrl: song.coverImage,
+      artists: [song.artist],
+    });
+  };
 
+  const handleAddToPlaylist = (song) => {
+    console.log(`Added ${song.title} to playlist`);
+  };
 
+  const handleViewSongDetails = (song) => {
+    console.log(`Viewing details for ${song.title}`);
+  };
 
-    return (
-        <div className="home-container">
-            <h1 style={{ marginBottom: "30px" }}>
-                Favorites
-            </h1>
-
-            {favorites.length === 0 ? (
-                <div className="empty-state">
-                    <h2>No favorite songs yet 🎵</h2>
-                    <p>Start adding songs to your favorites.</p>
-                </div>
-            ) : (
-                <div className="recent-grid">
-                    {favorites.map((track) => (
-                        <div key={track._id} className="music-card">
-                            <div
-                                className="card-image"
-                                onClick={() => setCurrentTrack(track)}
-                            >
-                                <img
-                                    src={track.imageUrl}
-                                    alt={track.title}
-                                />
-                                <div className="image-overlay"></div>
-                                <div className="play-btn">▶</div>
-                            </div>
-
-                            <div className="card-info">
-                                <h4>{track.title}</h4>
-                                <p>{track.artists?.[0]}</p>
-
-                                <button
-                                    className="remove-btn"
-                                    onClick={() =>
-                                        removeFavorite(track._id)
-                                    }
-                                >
-                                    Remove ❤️
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <FavouriteSongsPage
+      songs={songs}
+      onDeleteSong={handleDeleteSong}
+      onPlaySong={handlePlaySong}
+      onAddToPlaylist={handleAddToPlaylist}
+      onViewSongDetails={handleViewSongDetails}
+    />
+  );
 };
 
 export default Favorites;

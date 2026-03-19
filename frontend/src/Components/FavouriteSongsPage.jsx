@@ -20,7 +20,7 @@ const FavouriteSongsPage = ({ songs, onDeleteSong, onPlaySong, onAddToPlaylist, 
             <SongCard
               key={song.id}
               song={song}
-              onDelete={() => onDeleteSong(song.id)}
+              onPrimaryAction={() => onDeleteSong(song.id)}
               onPlay={() => onPlaySong(song)}
               onAddToPlaylist={() => onAddToPlaylist(song)}
               onViewDetails={() => onViewSongDetails(song)}

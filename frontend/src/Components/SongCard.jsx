@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
+import "../style/SongCard.css";
 
-const SongCard = ({ song, onDelete, onPlay, onAddToPlaylist, onViewDetails }) => {
+const SongCard = ({
+  song,
+  onPrimaryAction,
+  primaryActionLabel = "Remove from Favourites",
+  onPlay,
+  onAddToPlaylist,
+  onViewDetails,
+  onCardClick,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const cardRef = useRef(null);
 
@@ -18,17 +27,18 @@ const SongCard = ({ song, onDelete, onPlay, onAddToPlaylist, onViewDetails }) =>
     };
   }, []);
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (event) => {
+    event.stopPropagation();
     setIsMenuOpen((prev) => !prev);
   };
 
   const closeMenuAndRun = (callback) => {
     setIsMenuOpen(false);
-    callback();
+    callback?.();
   };
 
   return (
-    <article className="song-card" ref={cardRef}>
+    <article className="song-card" ref={cardRef} onClick={onCardClick}>
       <div className="song-cover-wrapper">
         <img src={song.coverImage} alt={`${song.title} cover`} className="song-cover" />
         <button
@@ -42,7 +52,8 @@ const SongCard = ({ song, onDelete, onPlay, onAddToPlaylist, onViewDetails }) =>
         </button>
         <DropdownMenu
           isOpen={isMenuOpen}
-          onDelete={() => closeMenuAndRun(onDelete)}
+          primaryActionLabel={primaryActionLabel}
+          onPrimaryAction={() => closeMenuAndRun(onPrimaryAction)}
           onPlay={() => closeMenuAndRun(onPlay)}
           onAddToPlaylist={() => closeMenuAndRun(onAddToPlaylist)}
           onViewDetails={() => closeMenuAndRun(onViewDetails)}

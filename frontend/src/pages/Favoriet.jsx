@@ -1,20 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import FavouriteSongsPage from "../Components/FavouriteSongsPage";
 import { getAllTracks } from "../api";
-import { sampleSongs } from "../data/sampleSongs";
 import "../style/FavouriteSongsPage.css";
 
-const Favorites = ({ setCurrentTrack }) => {
-  const { state } = useLocation();
-  const [songs, setSongs] = useState(sampleSongs);
+const FAVORITES_STORAGE_KEY = "wavefy-favorite-song-ids";
 
-  const favouriteSongIds = useMemo(() => state?.songs || [], [state?.songs]);
+const Favorites = ({ setCurrentTrack }) => {
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     const fetchFavoriteTracks = async () => {
+      const favouriteSongIds = JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY) || "[]");
+
       if (!favouriteSongIds.length) {
-        setSongs(sampleSongs);
+        setSongs([]);
         return;
       }
 
@@ -30,27 +29,33 @@ const Favorites = ({ setCurrentTrack }) => {
             track,
           }));
 
-        setSongs(favTracks.length ? favTracks : sampleSongs);
+        setSongs(favTracks);
       } catch (error) {
         console.error("Failed to fetch favorite tracks", error);
-        setSongs(sampleSongs);
+        setSongs([]);
       }
     };
 
     fetchFavoriteTracks();
-  }, [favouriteSongIds]);
+  }, []);
 
   const handleDeleteSong = (songId) => {
-    setSongs((prevSongs) => prevSongs.filter((song) => song.id !== songId));
+    const nextSongs = songs.filter((song) => song.id !== songId);
+    const nextIds = nextSongs.map((song) => song.id);
+
+    setSongs(nextSongs);
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(nextIds));
   };
 
   const handlePlaySong = (song) => {
-    setCurrentTrack(song.track || {
-      _id: song.id,
-      title: song.title,
-      imageUrl: song.coverImage,
-      artists: [song.artist],
-    });
+    setCurrentTrack(
+      song.track || {
+        _id: song.id,
+        title: song.title,
+        imageUrl: song.coverImage,
+        artists: [song.artist],
+      }
+    );
   };
 
   const handleAddToPlaylist = (song) => {
